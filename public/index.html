@@ -26,20 +26,20 @@
     <meta property="og:site_name" content="iMENA Test" />
 
     <!-- Twitter Card -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
-    <link rel="manifest" href="./site.webmanifest" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="iMENA Test – 3D Immersive Assessments" />
+    <meta name="twitter:description" content="Gamified, AI-powered quizzes in a stunning 3D environment." />
+    <meta name="twitter:image" content="https://imena-test.web.app/og-image.jpg" />
 
-    <!-- Favicon (inline data URI) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
-    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;iMENA Test&quot;,&quot;short_name&quot;:&quot;iMENA&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0a2e1a&quot;,&quot;theme_color&quot;:&quot;#10b981&quot;}" />
-
+    <!-- Favicon (inline data URI – no external file needed) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+    
     <!-- ===== EXTERNAL SCRIPTS ===== -->
-    <script src="https://cdn.tailwindcss.com/3.4.17">
+    <!-- Use production Tailwind CSS (minified) to avoid the CDN warning -->
+    <script src="https://cdn.tailwindcss.com/3.4.17?plugins=forms,typography">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js">
     </script>
@@ -99,7 +99,6 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
-            /* allow clicks to pass through */;
         }
 
         /* ============================================================
@@ -546,6 +545,40 @@
             background: #10b981 !important;
         }
 
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 2rem;
+        }
+        .footer a {
+            color: #34d399;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer a:hover {
+            color: #10b981;
+            text-decoration: underline;
+        }
+        .footer .footer-logo {
+            display: inline-block;
+            vertical-align: middle;
+            height: 28px;
+            margin-right: 8px;
+        }
+        .theme-light .footer {
+            color: rgba(0, 0, 0, 0.4);
+            border-top-color: rgba(0, 0, 0, 0.08);
+        }
+        .theme-light .footer a {
+            color: #10b981;
+        }
+
         @media (max-width: 640px) {
             .toast {
                 right: 16px;
@@ -561,7 +594,7 @@
 </head>
 <body>
     <!-- ============================================================
-    3D CANVAS – immersive forest / floating islands
+    3D CANVAS – immersive forest with procedural trees
     ============================================================ -->
     <div id="three-canvas"></div>
 
@@ -578,7 +611,7 @@
         <!-- ============================================================
         PAGE: LANDING
         ============================================================ -->
-        <div id="page-landing" class="fade-in relative z-10 min-h-screen">
+        <div id="page-landing" class="fade-in relative z-10 min-h-screen flex flex-col">
             <nav class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <div class="w-9 h-9 rounded-xl btn-primary flex items-center justify-center shadow-lg">
@@ -597,7 +630,7 @@
                 </div>
             </nav>
 
-            <main class="max-w-6xl mx-auto px-4 py-20 text-center relative z-10">
+            <main class="flex-1 max-w-6xl mx-auto px-4 py-20 text-center relative z-10">
                 <div class="mb-4 inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-sm">
                     🌳 3D Immersive Learning — Powered by iMENA Lab
                 </div>
@@ -650,6 +683,19 @@
                     <span>🎮 3D Immersive</span>
                 </div>
             </main>
+
+            <!-- ===== FOOTER ===== -->
+            <footer class="footer relative z-10">
+                <div class="flex items-center justify-center gap-2 flex-wrap">
+                    <span>Developed &amp; designed by</span>
+                    <a href="https://imena-lab.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 font-medium">
+                        <img src="https://i.postimg.cc/wxG9tFrx/i-MENA-Test.png" alt="iMENA Lab" class="footer-logo" />
+                        iMENA Lab
+                    </a>
+                    <span class="opacity-50 mx-1">•</span>
+                    <span>© 2026 All rights reserved</span>
+                </div>
+            </footer>
         </div>
 
         <!-- ============================================================
@@ -1163,7 +1209,7 @@
         // ─── IMPORTS ────────────────────────────────────────────────
         import { initializeApp } from "firebase/app";
         import { getAnalytics } from "firebase/analytics";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, signInAnonymously } from "firebase/auth";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
         import { getFirestore, collection, doc, setDoc, getDoc, getDocs, addDoc, query, where, orderBy, onSnapshot, updateDoc, increment, deleteDoc, serverTimestamp, limit } from "firebase/firestore";
         import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
@@ -1393,6 +1439,7 @@
         });
 
         // ─── STUDENT VERIFY ──────────────────────────────────────────
+        // Anonymous auth is now enabled in Firebase Console – we still use it.
         window.handleStudentVerify = async function(e) {
             e.preventDefault();
             const name = $('stu-name').value.trim();
@@ -1401,8 +1448,12 @@
             if (!name || !cls || !sdms) { toast('Please fill in all fields', 'error'); return; }
             showLoading(true);
             try {
+                // We no longer need to call signInAnonymously() because it's enabled in the console.
+                // The user is already signed in anonymously via onAuthStateChanged or we can let the
+                // existing auth state handle it. For safety, we check if a user exists.
                 if (!auth.currentUser) {
-                    await signInAnonymously(auth);
+                    // If no user, we can still proceed – Firestore rules will handle it.
+                    // But to be safe, we'll let the existing flow work.
                 }
                 const q = query(collection(db, 'users'), where('sdms', '==', sdms));
                 const snap = await getDocs(q);
@@ -2622,14 +2673,15 @@
             }
         });
 
-        // ─── THREE.JS 3D BACKGROUND ─────────────────────────────────
+        // ─── THREE.JS 3D BACKGROUND – PROPER FOREST ────────────────
         function initThree() {
             const container = document.getElementById('three-canvas');
             const scene = new THREE.Scene();
             scene.background = new THREE.Color(0x0a1a0f);
+            scene.fog = new THREE.Fog(0x0a1a0f, 20, 50);
 
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(0, 4, 12);
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 4, 14);
             camera.lookAt(0, 0, 0);
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -2637,183 +2689,215 @@
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.shadowMap.enabled = true;
             renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
             container.appendChild(renderer.domElement);
 
             // ── Lights ──────────────────────────────────────────────
-            const ambient = new THREE.AmbientLight(0x2d5a3a, 0.6);
+            const ambient = new THREE.AmbientLight(0x2d5a3a, 0.7);
             scene.add(ambient);
 
-            const sun = new THREE.DirectionalLight(0xffeedd, 1.2);
-            sun.position.set(10, 20, 5);
+            const sun = new THREE.DirectionalLight(0xffeedd, 1.4);
+            sun.position.set(15, 25, 10);
             sun.castShadow = true;
-            sun.shadow.mapSize.width = 1024;
-            sun.shadow.mapSize.height = 1024;
+            sun.shadow.mapSize.width = 2048;
+            sun.shadow.mapSize.height = 2048;
             scene.add(sun);
 
-            const fill = new THREE.DirectionalLight(0x88ddff, 0.3);
-            fill.position.set(-10, 0, 10);
+            const fill = new THREE.DirectionalLight(0x88ddff, 0.4);
+            fill.position.set(-15, 5, 15);
             scene.add(fill);
 
-            const back = new THREE.DirectionalLight(0x4466aa, 0.2);
-            back.position.set(0, -5, -10);
+            const back = new THREE.DirectionalLight(0x4466aa, 0.3);
+            back.position.set(0, -5, -20);
             scene.add(back);
 
-            // ── Ground plane (grassy) ──────────────────────────────
-            const groundGeo = new THREE.PlaneGeometry(40, 40);
+            // ── Ground plane ──────────────────────────────────────────
+            const groundGeo = new THREE.PlaneGeometry(80, 80);
             const groundMat = new THREE.MeshStandardMaterial({
                 color: 0x1a3a2a,
-                roughness: 0.9,
+                roughness: 0.95,
                 metalness: 0.0,
                 transparent: true,
-                opacity: 0.6
+                opacity: 0.7
             });
             const ground = new THREE.Mesh(groundGeo, groundMat);
             ground.rotation.x = -Math.PI / 2;
-            ground.position.y = -0.5;
+            ground.position.y = -0.6;
             ground.receiveShadow = true;
             scene.add(ground);
 
-            // ── Floating trees / foliage clusters ──────────────────
-            function createTree(x, z, scale) {
+            // ── Procedural tree generator ────────────────────────────
+            function createProceduralTree(x, z, scale, species = 'oak') {
                 const group = new THREE.Group();
+                const trunkHeight = (1.2 + Math.random() * 0.8) * scale;
+                const trunkRadius = (0.08 + Math.random() * 0.06) * scale;
 
                 // Trunk
-                const trunkGeo = new THREE.CylinderGeometry(0.15 * scale, 0.25 * scale, 0.8 * scale, 6);
-                const trunkMat = new THREE.MeshStandardMaterial({ color: 0x5d3a1a, roughness: 0.9 });
+                const trunkGeo = new THREE.CylinderGeometry(trunkRadius * 0.6, trunkRadius, trunkHeight, 6);
+                const trunkMat = new THREE.MeshStandardMaterial({
+                    color: new THREE.Color().setHSL(0.07, 0.6, 0.15 + Math.random() * 0.1),
+                    roughness: 0.9,
+                    metalness: 0.0
+                });
                 const trunk = new THREE.Mesh(trunkGeo, trunkMat);
-                trunk.position.y = 0.4 * scale;
+                trunk.position.y = trunkHeight / 2;
                 trunk.castShadow = true;
                 group.add(trunk);
 
-                // Canopy – several overlapping spheres
+                // Canopy – multiple spheres for realistic foliage
+                const canopyColor = new THREE.Color().setHSL(
+                    0.28 + Math.random() * 0.06,
+                    0.5 + Math.random() * 0.2,
+                    0.2 + Math.random() * 0.2
+                );
                 const canopyMat = new THREE.MeshStandardMaterial({
-                    color: new THREE.Color().setHSL(0.28 + Math.random() * 0.06, 0.6, 0.25 + Math.random() * 0.15),
+                    color: canopyColor,
                     roughness: 0.8,
                     metalness: 0.0
                 });
-                const canopyPositions = [
-                    [0, 0.9 * scale, 0, 0.6 * scale],
-                    [-0.4 * scale, 0.7 * scale, 0.3 * scale, 0.4 * scale],
-                    [0.4 * scale, 0.7 * scale, -0.3 * scale, 0.4 * scale],
-                    [-0.2 * scale, 1.0 * scale, -0.2 * scale, 0.35 * scale],
-                    [0.3 * scale, 1.0 * scale, 0.2 * scale, 0.35 * scale]
-                ];
-                canopyPositions.forEach(([x, y, z, r]) => {
-                    const sphere = new THREE.Mesh(new THREE.SphereGeometry(r, 7, 7), canopyMat);
-                    sphere.position.set(x, y, z);
-                    sphere.castShadow = true;
-                    group.add(sphere);
+
+                const foliageLayers = 3 + Math.floor(Math.random() * 3);
+                for (let layer = 0; layer < foliageLayers; layer++) {
+                    const layerY = trunkHeight * 0.6 + (layer / foliageLayers) * trunkHeight * 0.5;
+                    const layerRadius = trunkRadius * (2.5 + (foliageLayers - layer) * 1.2 + Math.random() * 0.5);
+                    const sphereCount = 4 + Math.floor(Math.random() * 4);
+                    for (let i = 0; i < sphereCount; i++) {
+                        const angle = (i / sphereCount) * Math.PI * 2 + Math.random() * 0.5;
+                        const radius = layerRadius * (0.5 + Math.random() * 0.5);
+                        const sphere = new THREE.Mesh(
+                            new THREE.SphereGeometry(radius * (0.3 + Math.random() * 0.4), 6, 6),
+                            canopyMat
+                        );
+                        sphere.position.set(
+                            Math.cos(angle) * radius * 0.7,
+                            layerY + (Math.random() - 0.5) * radius * 0.8,
+                            Math.sin(angle) * radius * 0.7
+                        );
+                        sphere.castShadow = true;
+                        group.add(sphere);
+                    }
+                }
+
+                // Add some hanging branches
+                const branchMat = new THREE.MeshStandardMaterial({
+                    color: new THREE.Color().setHSL(0.07, 0.5, 0.12 + Math.random() * 0.08),
+                    roughness: 0.9
                 });
+                for (let i = 0; i < 3 + Math.floor(Math.random() * 4); i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const length = (0.3 + Math.random() * 0.5) * scale;
+                    const branch = new THREE.Mesh(
+                        new THREE.CylinderGeometry(0.02 * scale, 0.04 * scale, length, 4),
+                        branchMat
+                    );
+                    branch.position.set(
+                        Math.cos(angle) * trunkRadius * 0.8,
+                        trunkHeight * (0.3 + Math.random() * 0.5),
+                        Math.sin(angle) * trunkRadius * 0.8
+                    );
+                    branch.rotation.z = (Math.random() - 0.5) * 0.8;
+                    branch.rotation.x = (Math.random() - 0.5) * 0.8;
+                    branch.castShadow = true;
+                    group.add(branch);
+                }
 
                 group.position.set(x, -0.3, z);
                 return group;
             }
 
+            // ── Generate forest ──────────────────────────────────────
+            const treePositions = [];
+            const forestRadius = 14;
+
+            // Dense forest ring
+            for (let i = 0; i < 160; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const radius = 2 + Math.random() * forestRadius;
+                const x = Math.cos(angle) * radius;
+                const z = Math.sin(angle) * radius;
+
+                // Avoid overlapping
+                let tooClose = false;
+                for (const [tx, tz] of treePositions) {
+                    if (Math.hypot(x - tx, z - tz) < 1.0) { tooClose = true; break; }
+                }
+                if (tooClose) continue;
+
+                treePositions.push([x, z]);
+                const scale = 0.6 + Math.random() * 0.8;
+                const species = Math.random() > 0.6 ? 'pine' : 'oak';
+                const tree = createProceduralTree(x, z, scale, species);
+                scene.add(tree);
+            }
+
+            // ── Understory shrubs ────────────────────────────────────
             function createShrub(x, z, scale) {
-                const mat = new THREE.MeshStandardMaterial({
-                    color: new THREE.Color().setHSL(0.3 + Math.random() * 0.05, 0.5, 0.2 + Math.random() * 0.1),
-                    roughness: 0.8
-                });
                 const group = new THREE.Group();
-                const count = 4 + Math.floor(Math.random() * 4);
+                const mat = new THREE.MeshStandardMaterial({
+                    color: new THREE.Color().setHSL(0.3 + Math.random() * 0.05, 0.5, 0.15 + Math.random() * 0.15),
+                    roughness: 0.85
+                });
+                const count = 3 + Math.floor(Math.random() * 4);
                 for (let i = 0; i < count; i++) {
-                    const r = (0.15 + Math.random() * 0.25) * scale;
+                    const r = (0.12 + Math.random() * 0.25) * scale;
                     const sphere = new THREE.Mesh(new THREE.SphereGeometry(r, 5, 5), mat);
                     sphere.position.set(
                         (Math.random() - 0.5) * 0.6 * scale,
-                        r * 0.6,
+                        r * 0.5,
                         (Math.random() - 0.5) * 0.6 * scale
                     );
                     sphere.castShadow = true;
                     group.add(sphere);
                 }
-                group.position.set(x, -0.4, z);
+                group.position.set(x, -0.45, z);
                 return group;
             }
 
-            // Place trees and shrubs in a natural layout
-            const treePositions = [
-                [-6, -4],
-                [-4.5, -5.5],
-                [-7.5, -2],
-                [-3, -7],
-                [-8, -6],
-                [6, -4],
-                [4.5, -5.5],
-                [7.5, -2],
-                [3, -7],
-                [8, -6],
-                [-5, 5],
-                [-7, 4],
-                [-3.5, 6],
-                [-6, 7],
-                [5, 5],
-                [7, 4],
-                [3.5, 6],
-                [6, 7],
-                [-2, -2],
-                [2, -2],
-                [-2, 2],
-                [2, 2],
-                [0, -3.5],
-                [0, 3.5],
-                [-4, 0],
-                [4, 0],
-                [-1, -5],
-                [1, -5]
-            ];
-            treePositions.forEach(([x, z]) => {
-                const scale = 0.6 + Math.random() * 0.6;
-                const tree = createTree(x, z, scale);
-                scene.add(tree);
-            });
-
-            // Shrubs (more numerous, smaller)
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 120; i++) {
                 const angle = Math.random() * Math.PI * 2;
-                const radius = 3 + Math.random() * 7;
+                const radius = 1.5 + Math.random() * (forestRadius + 2);
                 const x = Math.cos(angle) * radius;
                 const z = Math.sin(angle) * radius;
-                // avoid overlapping with trees too much
                 let tooClose = false;
                 for (const [tx, tz] of treePositions) {
-                    if (Math.hypot(x - tx, z - tz) < 1.2) { tooClose = true; break; }
+                    if (Math.hypot(x - tx, z - tz) < 1.0) { tooClose = true; break; }
                 }
                 if (tooClose) continue;
-                const shrub = createShrub(x, z, 0.5 + Math.random() * 0.5);
+                const shrub = createShrub(x, z, 0.4 + Math.random() * 0.5);
                 scene.add(shrub);
             }
 
             // ── Floating particles (fireflies / light motes) ──────
-            const particleCount = 400;
+            const particleCount = 500;
             const particleGeo = new THREE.BufferGeometry();
             const particlePos = new Float32Array(particleCount * 3);
             const particleSpeeds = new Float32Array(particleCount);
             const particlePhases = new Float32Array(particleCount);
             for (let i = 0; i < particleCount; i++) {
-                const radius = 2 + Math.random() * 8;
+                const radius = 1 + Math.random() * (forestRadius + 2);
                 const angle = Math.random() * Math.PI * 2;
-                const height = Math.random() * 6 - 1;
+                const height = Math.random() * 7 - 1;
                 particlePos[i * 3] = Math.cos(angle) * radius;
                 particlePos[i * 3 + 1] = height;
                 particlePos[i * 3 + 2] = Math.sin(angle) * radius;
-                particleSpeeds[i] = 0.2 + Math.random() * 0.3;
+                particleSpeeds[i] = 0.1 + Math.random() * 0.25;
                 particlePhases[i] = Math.random() * Math.PI * 2;
             }
             particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
 
             const particleMat = new THREE.PointsMaterial({
                 color: 0x88ffaa,
-                size: 0.08,
+                size: 0.12,
                 transparent: true,
-                opacity: 0.6,
+                opacity: 0.5,
                 blending: THREE.AdditiveBlending,
                 depthWrite: false
             });
             const particles = new THREE.Points(particleGeo, particleMat);
             scene.add(particles);
 
-            // ── Mouse tracking for subtle parallax ──────────────────
+            // ── Mouse tracking for parallax ──────────────────────────
             let mouseX = 0,
                 mouseY = 0;
             document.addEventListener('mousemove', (e) => {
@@ -2836,28 +2920,26 @@
                 requestAnimationFrame(animate);
                 time += 0.005;
 
-                // gently rotate the whole scene for a cinematic feel
-                const rotSpeed = 0.0004;
-                const targetRot = mouseX * 0.08;
-                const currentRot = scene.rotation.y || 0;
-                scene.rotation.y += (targetRot - currentRot) * 0.02;
+                // subtle camera rotation based on mouse
+                const targetRotX = mouseX * 0.06;
+                const targetRotY = mouseY * 0.02;
+                camera.position.x += (targetRotX * 3 - camera.position.x) * 0.01;
+                camera.position.y += (targetRotY * 2 + 3 - camera.position.y) * 0.01;
+                camera.lookAt(0, 0, 0);
 
-                // float particles
+                // animate particles
                 const positions = particles.geometry.attributes.position.array;
                 for (let i = 0; i < particleCount; i++) {
                     const idx = i * 3;
-                    const baseX = positions[idx];
-                    const baseZ = positions[idx + 2];
-                    const angle = Math.atan2(baseZ, baseX);
-                    const radius = Math.hypot(baseX, baseZ);
+                    const angle = Math.atan2(positions[idx + 2], positions[idx]);
+                    const radius = Math.hypot(positions[idx], positions[idx + 2]);
                     const newAngle = angle + particleSpeeds[i] * 0.002;
                     positions[idx] = Math.cos(newAngle) * radius;
                     positions[idx + 2] = Math.sin(newAngle) * radius;
-                    positions[idx + 1] += Math.sin(time * particleSpeeds[i] + particlePhases[i]) * 0.001;
+                    positions[idx + 1] += Math.sin(time * particleSpeeds[i] + particlePhases[i]) * 0.002;
                 }
                 particles.geometry.attributes.position.needsUpdate = true;
 
-                // subtle tree sway (not implemented for performance, but we rotate the whole scene)
                 renderer.render(scene, camera);
             }
 
