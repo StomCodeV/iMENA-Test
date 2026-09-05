@@ -1,26 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ========== BASIC META TAGS ========== -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- ============================================================
+    META TAGS – SEO, Open Graph, Twitter, Verification
+    ============================================================ -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- ========== SEO TITLE & DESCRIPTION ========== -->
     <title>iMENA Test</title>
-    <meta name="description" content="iMENA Test – Smart, gamified assessments for schools &amp; institutions. Secure, real‑time, and beautifully designed." />
-    <meta name="theme-color" content="#6366f1" />
+    <meta name="description" content="iMENA Test – Gamified, AI-powered assessments with 3D immersive environments, real‑time analytics, proctoring, and adaptive learning. Built for African schools and beyond." />
+    <meta name="theme-color" content="#0a2e1a" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://imena-test.web.app" />
 
+    <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="63F-utxq1WfQhILDRg8CWR1ivkjjcITYcpxs0Snj74M" />
-    
-    <!-- ===== Open Graph ===== -->
-    <meta property="og:title" content="iMENA Test – Smart Assessments for iMENA Hub" />
-    <meta property="og:description" content="Gamified, real‑time quizzes with adaptive learning, analytics, and anti‑cheat features." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://imena-test.firebaseapp.com" />
 
-    <!-- ===== Favicon ===== -->
+    <!-- Open Graph -->
+    <meta property="og:title" content="iMENA Test – 3D Immersive Assessments" />
+    <meta property="og:description" content="Gamified, AI-powered quizzes in a stunning 3D environment with proctoring and analytics." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://imena-test.web.app" />
+    <meta property="og:image" content="https://imena-test.web.app/og-image.jpg" />
+    <meta property="og:site_name" content="iMENA Test" />
+
+    <!-- Twitter Card -->
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -29,16 +34,22 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
     <link rel="manifest" href="./site.webmanifest" />
 
-    <!-- ===== Scripts ===== -->
+    <!-- Favicon (inline data URI) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;iMENA Test&quot;,&quot;short_name&quot;:&quot;iMENA&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0a2e1a&quot;,&quot;theme_color&quot;:&quot;#10b981&quot;}" />
+
+    <!-- ===== EXTERNAL SCRIPTS ===== -->
     <script src="https://cdn.tailwindcss.com/3.4.17">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
+    </script>
 
-    <!-- ===== Google Fonts ===== -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet" />
 
-    <!-- ===== Firebase Import Map ===== -->
+    <!-- Firebase Import Map -->
     <script type="importmap">
         {
             "imports": {
@@ -52,7 +63,9 @@
     </script>
 
     <style>
-        /* ── Reset & Base ── */
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -63,192 +76,92 @@
             height: 100%;
             margin: 0;
             font-family: 'Inter', sans-serif;
-            transition: background 0.5s, color 0.5s;
             overflow: hidden;
+            background: #0a1a0f;
+            color: #e2e8f0;
         }
         .app-root {
             height: 100%;
             overflow-y: auto;
             position: relative;
-            z-index: 1;
+            z-index: 10;
+            scroll-behavior: smooth;
         }
 
-        /* ── Animated Background ── */
-        .bg-animated {
+        /* ============================================================
+           THREE.JS CANVAS – fullscreen 3D background
+           ============================================================ */
+        #three-canvas {
             position: fixed;
-            inset: 0;
-            z-index: 0;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 30%, #312e81 60%, #1a1a2e 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 18s ease infinite;
-        }
-        .bg-animated::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 50% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 40%);
-            animation: pulseBg 8s ease-in-out infinite alternate;
-        }
-        .bg-animated::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.08), transparent),
-                radial-gradient(2px 2px at 30% 70%, rgba(255, 255, 255, 0.06), transparent),
-                radial-gradient(2px 2px at 50% 10%, rgba(255, 255, 255, 0.1), transparent),
-                radial-gradient(2px 2px at 70% 60%, rgba(255, 255, 255, 0.05), transparent),
-                radial-gradient(2px 2px at 90% 30%, rgba(255, 255, 255, 0.08), transparent);
-            background-size: 200px 200px;
-            animation: starDrift 30s linear infinite;
-        }
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        @keyframes pulseBg {
-            0% {
-                opacity: 0.6;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-        @keyframes starDrift {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(-50px, -50px);
-            }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: 0;
             pointer-events: none;
-            overflow: hidden;
-        }
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(99, 102, 241, 0.15);
-            animation: floatParticle 20s infinite ease-in-out;
-        }
-        .particle:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-            background: rgba(139, 92, 246, 0.08);
-        }
-        .particle:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            bottom: 15%;
-            right: 8%;
-            animation-delay: -5s;
-            background: rgba(99, 102, 241, 0.06);
-        }
-        .particle:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 50%;
-            left: 70%;
-            animation-delay: -10s;
-            background: rgba(245, 158, 11, 0.07);
-        }
-        .particle:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            right: 20%;
-            animation-delay: -3s;
-            background: rgba(34, 197, 94, 0.05);
-        }
-        .particle:nth-child(5) {
-            width: 50px;
-            height: 50px;
-            bottom: 30%;
-            left: 30%;
-            animation-delay: -8s;
-            background: rgba(236, 72, 153, 0.06);
-        }
-        @keyframes floatParticle {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translate(30px, -40px) scale(1.2);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translate(-20px, 20px) scale(0.8);
-                opacity: 0.4;
-            }
-            75% {
-                transform: translate(40px, 10px) scale(1.1);
-                opacity: 0.7;
-            }
+            /* allow clicks to pass through */;
         }
 
-        /* ── Glass & Effects ── */
+        /* ============================================================
+           GLASS / FROSTED UI COMPONENTS
+           ============================================================ */
         .glass {
-            background: rgba(15, 23, 42, 0.72);
-            backdrop-filter: blur(18px) saturate(1.2);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(10, 30, 18, 0.65);
+            backdrop-filter: blur(18px) saturate(1.3);
+            -webkit-backdrop-filter: blur(18px) saturate(1.3);
+            border: 1px solid rgba(52, 211, 153, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
         .glass-light {
-            background: rgba(30, 41, 59, 0.45);
+            background: rgba(16, 40, 26, 0.45);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(52, 211, 153, 0.08);
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #f59e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .gradient-text-2 {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .glass-dark {
+            background: rgba(5, 15, 10, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(52, 211, 153, 0.10);
         }
 
-        /* ── Buttons ── */
+        /* ============================================================
+           GRADIENT & TEXT EFFECTS
+           ============================================================ */
+        .gradient-text {
+            background: linear-gradient(135deg, #34d399, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-glow {
+            background: radial-gradient(circle at 30% 30%, rgba(52, 211, 153, 0.25), transparent 70%);
+        }
+
+        /* ============================================================
+           BUTTONS
+           ============================================================ */
         .btn-primary {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #34d399, #10b981);
             transition: all 0.25s ease;
             border: none;
             color: #fff;
             font-weight: 600;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
         }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.35);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.40);
         }
         .btn-secondary {
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.10);
             transition: all 0.2s;
+            color: #e2e8f0;
         }
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(52, 211, 153, 0.3);
         }
         .btn-danger {
             background: rgba(239, 68, 68, 0.2);
@@ -259,7 +172,9 @@
             background: rgba(239, 68, 68, 0.3);
         }
 
-        /* ── Google Sign-In ── */
+        /* ============================================================
+           GOOGLE SIGN-IN BUTTON
+           ============================================================ */
         .google-btn {
             display: flex;
             align-items: center;
@@ -273,10 +188,8 @@
             border-radius: 12px;
             font-size: 0.95rem;
             font-weight: 500;
-            font-family: 'Inter', sans-serif;
             transition: all 0.2s ease;
             cursor: pointer;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
         }
         .google-btn:hover {
             background: #f8f9fa;
@@ -284,32 +197,27 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
             transform: translateY(-1px);
         }
-        .google-btn:active {
-            transform: scale(0.98);
-        }
 
-        /* ── Theme Overrides ── */
-        .theme-light .bg-animated {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 40%, #f8fafc 70%, #eef2ff 100%) !important;
-        }
-        .theme-light .particle {
-            background: rgba(99, 102, 241, 0.06) !important;
+        /* ============================================================
+           THEMES (light / african / ocean / forest)
+           ============================================================ */
+        .theme-light .app-root {
+            color: #0f172a;
         }
         .theme-light .glass {
             background: rgba(255, 255, 255, 0.72) !important;
-            border-color: rgba(0, 0, 0, 0.06) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
         }
         .theme-light .glass-light {
             background: rgba(255, 255, 255, 0.5) !important;
-            border-color: rgba(0, 0, 0, 0.04) !important;
         }
-        .theme-light body,
-        .theme-light .app-root {
-            color: #0f172a !important;
+        .theme-light .glass-dark {
+            background: rgba(240, 245, 240, 0.8) !important;
         }
         .theme-light .btn-secondary {
             background: rgba(0, 0, 0, 0.04);
             border-color: rgba(0, 0, 0, 0.08);
+            color: #0f172a;
         }
         .theme-light .btn-secondary:hover {
             background: rgba(0, 0, 0, 0.08);
@@ -322,12 +230,9 @@
             color: #0f172a !important;
         }
 
-        .theme-african .bg-animated {
-            background: linear-gradient(135deg, #1a0e08 0%, #2d1810 30%, #1a0e08 60%, #3d1f12 100%) !important;
-        }
         .theme-african .glass {
             background: rgba(44, 24, 16, 0.85) !important;
-            border-color: rgba(251, 191, 36, 0.12) !important;
+            border-color: rgba(251, 191, 36, 0.15) !important;
         }
         .theme-african .btn-primary {
             background: linear-gradient(135deg, #f59e0b, #d97706) !important;
@@ -341,70 +246,74 @@
             -webkit-text-fill-color: transparent !important;
         }
 
-        .theme-ocean .bg-animated {
-            background: linear-gradient(135deg, #0c1a2b 0%, #0f2847 40%, #1a365d 70%, #0c1a2b 100%) !important;
-        }
         .theme-ocean .glass {
-            background: rgba(15, 40, 71, 0.8) !important;
+            background: rgba(12, 30, 50, 0.8) !important;
             border-color: rgba(56, 189, 248, 0.12) !important;
         }
         .theme-ocean .btn-primary {
             background: linear-gradient(135deg, #38bdf8, #0ea5e9) !important;
         }
 
-        .theme-forest .bg-animated {
-            background: linear-gradient(135deg, #0a1a0f 0%, #0d2818 40%, #1a3d2a 70%, #0a1a0f 100%) !important;
-        }
         .theme-forest .glass {
-            background: rgba(13, 40, 24, 0.8) !important;
+            background: rgba(10, 30, 18, 0.75) !important;
             border-color: rgba(52, 211, 153, 0.12) !important;
         }
         .theme-forest .btn-primary {
             background: linear-gradient(135deg, #34d399, #10b981) !important;
         }
 
-        /* ── Animations ── */
-        .fade-in {
-            animation: fadeIn 0.4s ease;
+        /* ============================================================
+           SIDEBAR
+           ============================================================ */
+        .sidebar-link {
+            transition: all 0.15s;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.5);
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .sidebar-link:hover {
+            background: rgba(52, 211, 153, 0.10);
+            color: #fff;
         }
-        .slide-up {
-            animation: slideUp 0.45s ease;
+        .sidebar-link.active {
+            background: rgba(52, 211, 153, 0.18);
+            color: #34d399;
+            font-weight: 500;
         }
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        .theme-light .sidebar-link {
+            color: rgba(0, 0, 0, 0.5);
+        }
+        .theme-light .sidebar-link:hover {
+            background: rgba(52, 211, 153, 0.08);
+            color: #0f172a;
+        }
+        .theme-light .sidebar-link.active {
+            background: rgba(52, 211, 153, 0.12);
+            color: #10b981;
         }
 
-        /* ── Quiz Options ── */
+        /* ============================================================
+           QUIZ OPTIONS
+           ============================================================ */
         .quiz-option {
             transition: all 0.15s ease;
             cursor: pointer;
             border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.04);
         }
         .quiz-option:hover {
-            background: rgba(99, 102, 241, 0.12);
-            border-color: rgba(99, 102, 241, 0.3);
+            background: rgba(52, 211, 153, 0.10);
+            border-color: rgba(52, 211, 153, 0.3);
         }
         .quiz-option.selected {
-            background: rgba(99, 102, 241, 0.2);
-            border-color: #6366f1;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+            background: rgba(52, 211, 153, 0.20);
+            border-color: #10b981;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
         }
         .quiz-option.correct-reveal {
             background: rgba(34, 197, 94, 0.2);
@@ -415,7 +324,9 @@
             border-color: #ef4444;
         }
 
-        /* ── Toast ── */
+        /* ============================================================
+           TOAST
+           ============================================================ */
         .toast {
             position: fixed;
             bottom: 28px;
@@ -426,9 +337,9 @@
             padding: 14px 20px;
             border-radius: 16px;
             backdrop-filter: blur(16px);
-            background: rgba(15, 23, 42, 0.88);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            background: rgba(10, 26, 15, 0.92);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -461,71 +372,27 @@
             border-color: rgba(34, 197, 94, 0.3);
         }
 
-        /* ── Scrollbar ── */
-        .scrollable {
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
-        }
+        /* ============================================================
+           SCROLLBAR
+           ============================================================ */
         .scrollable::-webkit-scrollbar {
             width: 5px;
         }
         .scrollable::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(52, 211, 153, 0.3);
             border-radius: 10px;
         }
         .scrollable::-webkit-scrollbar-track {
             background: transparent;
         }
-
-        /* ── Sidebar ── */
-        .sidebar-link {
-            transition: all 0.15s;
-            cursor: pointer;
-            border-radius: 10px;
-            padding: 8px 14px;
-            font-size: 0.875rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .sidebar-link:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: #fff;
-        }
-        .sidebar-link.active {
-            background: rgba(99, 102, 241, 0.18);
-            color: #6366f1;
-            font-weight: 500;
-        }
-        .theme-light .sidebar-link {
-            color: rgba(0, 0, 0, 0.5);
-        }
-        .theme-light .sidebar-link:hover {
-            background: rgba(99, 102, 241, 0.08);
-            color: #0f172a;
-        }
-        .theme-light .sidebar-link.active {
-            background: rgba(99, 102, 241, 0.12);
-            color: #6366f1;
-        }
-        .theme-african .sidebar-link.active {
-            background: rgba(251, 191, 36, 0.15) !important;
-            color: #fbbf24 !important;
+        .scrollable {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(52, 211, 153, 0.2) transparent;
         }
 
-        /* ── Chart ── */
-        .chart-bar {
-            transition: height 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-            min-height: 4px;
-            border-radius: 6px 6px 0 0;
-            background: linear-gradient(180deg, #6366f1, #8b5cf6);
-        }
-        .theme-african .chart-bar {
-            background: linear-gradient(180deg, #fbbf24, #d97706) !important;
-        }
-
-        /* ── Badge ── */
+        /* ============================================================
+           MISC
+           ============================================================ */
         .badge-icon {
             width: 44px;
             height: 44px;
@@ -534,16 +401,83 @@
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
-            background: rgba(251, 191, 36, 0.15);
-            border: 1px solid rgba(251, 191, 36, 0.2);
+            background: rgba(52, 211, 153, 0.15);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+        .logo-preview {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        .logo-preview.has-logo {
+            border-style: solid;
+            border-color: rgba(52, 211, 153, 0.3);
+        }
+        .fitb-input {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            border-bottom: 2px solid rgba(52, 211, 153, 0.4);
+            padding: 2px 8px;
+            color: #fff;
+            font-size: 1rem;
+            min-width: 80px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .fitb-input:focus {
+            outline: none;
+            border-color: #34d399;
+        }
+        .match-pair {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .match-pair select {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 6px 12px;
+            color: #fff;
+            font-size: 0.85rem;
+            min-width: 120px;
         }
 
-        /* ── Rules Overlay ── */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #10b981;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         .rules-overlay {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             z-index: 9998;
             display: flex;
             align-items: center;
@@ -570,70 +504,48 @@
             border-bottom: none;
         }
 
-        /* ── Logo preview ── */
-        .logo-preview {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            object-fit: cover;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-        }
-        .logo-preview.has-logo {
-            border-style: solid;
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        /* ── Misc ── */
-        .match-pair {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .match-pair select {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 6px 12px;
-            color: #fff;
-            font-size: 0.85rem;
-            min-width: 120px;
-        }
-        .fitb-input {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.06);
-            border: none;
-            border-bottom: 2px solid rgba(99, 102, 241, 0.4);
-            padding: 2px 8px;
-            color: #fff;
-            font-size: 1rem;
-            min-width: 80px;
-            text-align: center;
-            transition: border-color 0.3s;
-        }
-        .fitb-input:focus {
-            outline: none;
-            border-color: #6366f1;
-        }
-
-        /* ── Loading shimmer ── */
-        .shimmer {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 25%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.02) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.8s infinite;
-        }
-        @keyframes shimmer {
-            0% {
-                background-position: 200% 0;
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
             }
-            100% {
-                background-position: -200% 0;
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* ── Responsive ── */
+        .chart-bar {
+            transition: height 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            min-height: 4px;
+            border-radius: 6px 6px 0 0;
+            background: linear-gradient(180deg, #34d399, #10b981);
+        }
+        .theme-african .chart-bar {
+            background: linear-gradient(180deg, #fbbf24, #d97706) !important;
+        }
+
+        .high-contrast .glass {
+            background: rgba(0, 0, 0, 0.85) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+        .high-contrast .btn-primary {
+            background: #10b981 !important;
+        }
+
         @media (max-width: 640px) {
             .toast {
                 right: 16px;
@@ -645,73 +557,35 @@
                 padding: 20px;
             }
         }
-
-        /* ── Loading overlay ── */
-        .loading-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .loading-spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #6366f1;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* ── High Contrast ── */
-        .high-contrast .glass {
-            background: rgba(0, 0, 0, 0.85) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
-        }
-        .high-contrast .btn-primary {
-            background: #6366f1 !important;
-        }
-        .high-contrast .btn-secondary {
-            background: rgba(255, 255, 255, 0.1) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
-        }
     </style>
 </head>
 <body>
-    <!-- ===== Animated Background ===== -->
-    <div class="bg-animated"></div>
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+    <!-- ============================================================
+    3D CANVAS – immersive forest / floating islands
+    ============================================================ -->
+    <div id="three-canvas"></div>
 
+    <!-- ============================================================
+    APP ROOT
+    ============================================================ -->
     <div class="app-root" id="app">
 
-        <!-- ===== LOADING OVERLAY ===== -->
+        <!-- LOADING OVERLAY -->
         <div id="loading-overlay" class="loading-overlay hidden">
             <div class="loading-spinner"></div>
         </div>
 
-        <!-- ===== LANDING ===== -->
-        <div id="page-landing" class="fade-in relative z-10">
+        <!-- ============================================================
+        PAGE: LANDING
+        ============================================================ -->
+        <div id="page-landing" class="fade-in relative z-10 min-h-screen">
             <nav class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <div class="w-9 h-9 rounded-xl btn-primary flex items-center justify-center shadow-lg">
                         <i data-lucide="brain" class="w-5 h-5 text-white"></i>
                     </div>
                     <span class="font-heading font-bold text-lg tracking-tight" id="brand-name">iMENA Test</span>
-                    <span class="text-[10px] font-mono bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-full border border-indigo-500/20 ml-1">v1.0</span>
+                    <span class="text-[10px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30 ml-1">3D</span>
                 </div>
                 <div class="flex gap-2">
                     <button onclick="showPage('teacher-login')" class="btn-secondary px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-1.5">
@@ -722,21 +596,22 @@
                     </button>
                 </div>
             </nav>
-            <main class="max-w-6xl mx-auto px-4 py-16 text-center">
-                <div class="mb-4 inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                    🌍 Built for iMENA Hub — Empowering Education
+
+            <main class="max-w-6xl mx-auto px-4 py-20 text-center relative z-10">
+                <div class="mb-4 inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-sm">
+                    🌳 3D Immersive Learning — Powered by iMENA Lab
                 </div>
                 <h1 class="font-heading text-4xl md:text-7xl font-extrabold mb-4 leading-[1.1] tracking-tight">
                     <span class="gradient-text">iMENA Test</span>
                 </h1>
                 <p class="text-slate-300 text-lg md:text-xl mb-6 max-w-2xl mx-auto font-light">
-                    Smart Assessments · Gamified · AI-Powered · Firebase‑Secure
+                    Smart Assessments · 3D Immersive · AI-Powered · Forest‑Secure
                 </p>
                 <p class="text-slate-400 text-sm mb-10 max-w-xl mx-auto">
-                    The most advanced quiz platform for schools — trusted by educators worldwide.
+                    The most advanced quiz platform for schools — now in stunning 3D.
                 </p>
                 <div class="flex flex-wrap justify-center gap-4 mb-16">
-                    <button onclick="showPage('teacher-login')" class="btn-primary px-8 py-3.5 rounded-2xl text-white font-semibold flex items-center gap-2 shadow-xl shadow-indigo-500/20">
+                    <button onclick="showPage('teacher-login')" class="btn-primary px-8 py-3.5 rounded-2xl text-white font-semibold flex items-center gap-2 shadow-xl shadow-emerald-500/20">
                         <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Teacher Portal
                     </button>
                     <button onclick="showPage('student-verify')" class="btn-secondary px-8 py-3.5 rounded-2xl font-semibold flex items-center gap-2">
@@ -745,22 +620,22 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-indigo-500/5 transition-all">
+                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
                         <i data-lucide="trophy" class="w-8 h-8 text-amber-400 mb-3"></i>
                         <h3 class="font-semibold">Gamification</h3>
                         <p class="text-sm text-slate-400">Badges, streaks, leaderboards &amp; power‑ups</p>
                     </div>
-                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-indigo-500/5 transition-all">
-                        <i data-lucide="brain" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
+                        <i data-lucide="brain" class="w-8 h-8 text-emerald-400 mb-3"></i>
                         <h3 class="font-semibold">Adaptive Learning</h3>
                         <p class="text-sm text-slate-400">Personalised difficulty &amp; AI feedback</p>
                     </div>
-                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-indigo-500/5 transition-all">
+                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
                         <i data-lucide="users" class="w-8 h-8 text-purple-400 mb-3"></i>
                         <h3 class="font-semibold">Collaborative</h3>
                         <p class="text-sm text-slate-400">Community quizzes, peer review &amp; chat</p>
                     </div>
-                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-indigo-500/5 transition-all">
+                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
                         <i data-lucide="bar-chart-3" class="w-8 h-8 text-emerald-400 mb-3"></i>
                         <h3 class="font-semibold">Analytics</h3>
                         <p class="text-sm text-slate-400">Item analysis, progress, predictions</p>
@@ -772,19 +647,21 @@
                     <span>⚡ Real‑time sync</span>
                     <span>📱 Mobile‑first</span>
                     <span>🌍 10+ languages</span>
+                    <span>🎮 3D Immersive</span>
                 </div>
             </main>
         </div>
 
-        <!-- ===== TEACHER LOGIN (Google Only) ===== -->
-        <div id="page-teacher-login" class="hidden fade-in h-full flex items-center justify-center px-4 relative z-10">
+        <!-- ============================================================
+        PAGE: TEACHER LOGIN (Google)
+        ============================================================ -->
+        <div id="page-teacher-login" class="hidden fade-in h-screen flex items-center justify-center px-4 relative z-10">
             <div class="glass rounded-2xl p-8 w-full max-w-sm slide-up">
                 <button onclick="showPage('landing')" class="text-slate-400 hover:text-white mb-4 flex items-center gap-1 text-sm transition">
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
                 </button>
                 <h2 class="font-heading text-2xl font-bold mb-2">Teacher Portal</h2>
                 <p class="text-slate-400 text-sm mb-6">Sign in with your Google account to manage quizzes &amp; reports</p>
-
                 <button onclick="signInWithGoogle()" class="google-btn">
                     <svg width="20" height="20" viewBox="0 0 48 48">
                         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -794,15 +671,16 @@
                     </svg>
                     <span>Sign in with Google</span>
                 </button>
-
                 <div class="mt-4 text-center">
                     <p class="text-xs text-slate-500">Only authorised teachers can access this portal.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ===== STUDENT VERIFY ===== -->
-        <div id="page-student-verify" class="hidden fade-in h-full flex items-center justify-center px-4 relative z-10">
+        <!-- ============================================================
+        PAGE: STUDENT VERIFY
+        ============================================================ -->
+        <div id="page-student-verify" class="hidden fade-in h-screen flex items-center justify-center px-4 relative z-10">
             <div class="glass rounded-2xl p-8 w-full max-w-sm slide-up">
                 <button onclick="showPage('landing')" class="text-slate-400 hover:text-white mb-4 flex items-center gap-1 text-sm transition">
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
@@ -811,17 +689,19 @@
                 <p class="text-slate-400 text-sm mb-6">Enter your details to access quizzes &amp; track your progress</p>
                 <form id="student-verify-form" onsubmit="handleStudentVerify(event)">
                     <label class="text-sm text-slate-400 block mb-1">Full Name *</label>
-                    <input id="stu-name" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 mb-3 text-white placeholder-slate-500 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="e.g. Amina Mohammed" />
+                    <input id="stu-name" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 mb-3 text-white placeholder-slate-500 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="e.g. Amina Mohammed" />
                     <label class="text-sm text-slate-400 block mb-1">Class *</label>
-                    <input id="stu-class" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 mb-3 text-white placeholder-slate-500 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="e.g. JSS 3A" />
+                    <input id="stu-class" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 mb-3 text-white placeholder-slate-500 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="e.g. JSS 3A" />
                     <label class="text-sm text-slate-400 block mb-1">SDMS Code *</label>
-                    <input id="stu-sdms" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 mb-6 text-white placeholder-slate-500 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="e.g. STU-2024-001" />
-                    <button type="submit" class="w-full btn-primary py-3.5 rounded-xl text-white font-semibold shadow-lg shadow-indigo-500/20">Verify &amp; Continue</button>
+                    <input id="stu-sdms" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 mb-6 text-white placeholder-slate-500 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="e.g. STU-2024-001" />
+                    <button type="submit" class="w-full btn-primary py-3.5 rounded-xl text-white font-semibold shadow-lg shadow-emerald-500/20">Verify &amp; Continue</button>
                 </form>
             </div>
         </div>
 
-        <!-- ===== TEACHER DASHBOARD ===== -->
+        <!-- ============================================================
+        PAGE: TEACHER DASHBOARD
+        ============================================================ -->
         <div id="page-teacher-dashboard" class="hidden fade-in flex h-full relative z-10">
             <!-- Sidebar -->
             <aside class="glass w-60 shrink-0 p-4 flex-col hidden md:flex h-full overflow-y-auto scrollable">
@@ -847,7 +727,6 @@
 
             <!-- Main Content -->
             <div class="flex-1 overflow-y-auto p-4 md:p-6 scrollable">
-                <!-- Mobile header -->
                 <div class="md:hidden flex items-center justify-between mb-4">
                     <span class="font-heading font-bold">iMENA Test</span>
                     <div class="flex gap-1">
@@ -882,23 +761,23 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                                 <div>
                                     <label class="text-sm text-slate-400 block mb-1">Quiz Title *</label>
-                                    <input id="q-title" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="e.g. Biology Test 1" />
+                                    <input id="q-title" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="e.g. Biology Test 1" />
                                 </div>
                                 <div>
                                     <label class="text-sm text-slate-400 block mb-1">Subject *</label>
-                                    <input id="q-subject" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="e.g. Biology" />
+                                    <input id="q-subject" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="e.g. Biology" />
                                 </div>
                                 <div>
                                     <label class="text-sm text-slate-400 block mb-1">Passing Mark (%)</label>
-                                    <input id="q-pass" type="number" min="0" max="100" value="50" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" />
+                                    <input id="q-pass" type="number" min="0" max="100" value="50" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" />
                                 </div>
                                 <div>
                                     <label class="text-sm text-slate-400 block mb-1">Time Limit (mins, 0=unlimited)</label>
-                                    <input id="q-time" type="number" min="0" value="30" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" />
+                                    <input id="q-time" type="number" min="0" value="30" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" />
                                 </div>
                                 <div class="md:col-span-2">
                                     <label class="text-sm text-slate-400 block mb-1">Quiz Description (optional)</label>
-                                    <input id="q-desc" type="text" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="What students will learn..." />
+                                    <input id="q-desc" type="text" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="What students will learn..." />
                                 </div>
                             </div>
 
@@ -926,7 +805,7 @@
                                 <button type="button" onclick="addQuestion('ordering')" class="btn-secondary px-3 py-2 rounded-xl text-sm flex items-center gap-1.5"><i data-lucide="arrow-up-down" class="w-4 h-4"></i> + Ordering</button>
                             </div>
 
-                            <button type="submit" class="btn-primary px-8 py-3.5 rounded-2xl text-white font-semibold shadow-lg shadow-indigo-500/20 w-full md:w-auto">🚀 Create Quiz</button>
+                            <button type="submit" class="btn-primary px-8 py-3.5 rounded-2xl text-white font-semibold shadow-lg shadow-emerald-500/20 w-full md:w-auto">🚀 Create Quiz</button>
                         </form>
                     </div>
                 </div>
@@ -1049,16 +928,16 @@
                             <div>
                                 <label class="text-sm text-slate-400 block mb-2">Theme</label>
                                 <div class="flex flex-wrap gap-2">
+                                    <button onclick="applyTheme('forest')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-900 border border-emerald-700"></span> Forest</button>
                                     <button onclick="applyTheme('dark')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-slate-900 border border-slate-600"></span> Dark</button>
                                     <button onclick="applyTheme('light')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-slate-100 border border-slate-300"></span> Light</button>
                                     <button onclick="applyTheme('african')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-800 border border-amber-600"></span> African</button>
                                     <button onclick="applyTheme('ocean')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-900 border border-blue-700"></span> Ocean</button>
-                                    <button onclick="applyTheme('forest')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-900 border border-emerald-700"></span> Forest</button>
                                 </div>
                             </div>
                             <div>
                                 <label class="text-sm text-slate-400 block mb-2">Font Family</label>
-                                <select id="font-select" onchange="applyFont(this.value)" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none">
+                                <select id="font-select" onchange="applyFont(this.value)" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none">
                                     <option value="inter">Inter (Default)</option>
                                     <option value="space">Space Grotesk</option>
                                     <option value="playfair">Playfair Display</option>
@@ -1068,14 +947,14 @@
                             <div>
                                 <label class="text-sm text-slate-400 block mb-2">Primary Color</label>
                                 <div class="flex items-center gap-3">
-                                    <input type="color" id="primary-color" value="#6366f1" onchange="applyPrimaryColor(this.value)" class="w-12 h-12 rounded-xl cursor-pointer border border-slate-700 bg-transparent" />
-                                    <span class="text-sm text-slate-400" id="primary-color-label">#6366f1</span>
+                                    <input type="color" id="primary-color" value="#10b981" onchange="applyPrimaryColor(this.value)" class="w-12 h-12 rounded-xl cursor-pointer border border-slate-700 bg-transparent" />
+                                    <span class="text-sm text-slate-400" id="primary-color-label">#10b981</span>
                                     <button onclick="resetPrimaryColor()" class="btn-secondary px-3 py-1.5 rounded-lg text-sm">Reset</button>
                                 </div>
                             </div>
                             <div>
                                 <label class="text-sm text-slate-400 block mb-2">Brand Name</label>
-                                <input id="brand-name-input" type="text" value="iMENA Test" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" onchange="updateBrandName(this.value)" />
+                                <input id="brand-name-input" type="text" value="iMENA Test" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" onchange="updateBrandName(this.value)" />
                             </div>
                             <button onclick="saveCustomization()" class="btn-primary px-6 py-3 rounded-xl text-white font-semibold">💾 Save Customization</button>
                         </div>
@@ -1090,19 +969,19 @@
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div><label class="font-medium">High Contrast Mode</label><p class="text-xs text-slate-500">Improves readability for accessibility</p></div>
-                                <input type="checkbox" id="high-contrast" onchange="toggleHighContrast(this.checked)" class="w-5 h-5 accent-indigo-500" />
+                                <input type="checkbox" id="high-contrast" onchange="toggleHighContrast(this.checked)" class="w-5 h-5 accent-emerald-500" />
                             </div>
                             <div class="flex items-center justify-between">
                                 <div><label class="font-medium">Enable Voice Input</label><p class="text-xs text-slate-500">Allow students to use speech‑to‑text</p></div>
-                                <input type="checkbox" id="voice-input" checked onchange="toggleVoiceInput(this.checked)" class="w-5 h-5 accent-indigo-500" />
+                                <input type="checkbox" id="voice-input" checked onchange="toggleVoiceInput(this.checked)" class="w-5 h-5 accent-emerald-500" />
                             </div>
                             <div class="flex items-center justify-between">
                                 <div><label class="font-medium">Auto‑submit on Timeout</label><p class="text-xs text-slate-500">Automatically submit when time runs out</p></div>
-                                <input type="checkbox" id="auto-submit" checked class="w-5 h-5 accent-indigo-500" />
+                                <input type="checkbox" id="auto-submit" checked class="w-5 h-5 accent-emerald-500" />
                             </div>
                             <div class="flex items-center justify-between">
                                 <div><label class="font-medium">Show Exam Rules Before Start</label><p class="text-xs text-slate-500">Students must agree to rules before attempting</p></div>
-                                <input type="checkbox" id="show-rules" checked class="w-5 h-5 accent-indigo-500" />
+                                <input type="checkbox" id="show-rules" checked class="w-5 h-5 accent-emerald-500" />
                             </div>
                             <div>
                                 <label class="text-sm text-slate-400 block mb-1">Default Language</label>
@@ -1121,7 +1000,9 @@
             </div>
         </div>
 
-        <!-- ===== STUDENT PORTAL ===== -->
+        <!-- ============================================================
+        PAGE: STUDENT PORTAL
+        ============================================================ -->
         <div id="page-student-portal" class="hidden fade-in h-full flex flex-col relative z-10">
             <nav class="glass px-4 py-3 flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-2">
@@ -1144,7 +1025,7 @@
                     </div>
 
                     <div class="flex flex-wrap gap-3 mb-6">
-                        <div class="glass-light rounded-xl px-5 py-2.5"><span class="text-xs text-slate-400">Points</span><span class="font-bold text-indigo-400 ml-2" id="student-points">0</span></div>
+                        <div class="glass-light rounded-xl px-5 py-2.5"><span class="text-xs text-slate-400">Points</span><span class="font-bold text-emerald-400 ml-2" id="student-points">0</span></div>
                         <div class="glass-light rounded-xl px-5 py-2.5"><span class="text-xs text-slate-400">Streak</span><span class="font-bold text-amber-400 ml-2" id="student-streak">0</span></div>
                         <div class="glass-light rounded-xl px-5 py-2.5"><span class="text-xs text-slate-400">Level</span><span class="font-bold text-purple-400 ml-2" id="student-level">1</span></div>
                         <div class="glass-light rounded-xl px-5 py-2.5"><span class="text-xs text-slate-400">Quizzes Taken</span><span class="font-bold text-emerald-400 ml-2" id="student-taken">0</span></div>
@@ -1152,12 +1033,12 @@
 
                     <div class="glass rounded-2xl p-6 mb-6">
                         <form onsubmit="joinQuizByCode(event)" class="flex gap-2">
-                            <input id="quiz-code-input" type="text" maxlength="6" required class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 uppercase tracking-widest font-heading text-center transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="Enter 6‑digit code" />
-                            <button type="submit" class="btn-primary px-6 py-3.5 rounded-xl text-white font-semibold shadow-lg shadow-indigo-500/20 flex items-center gap-2"><i data-lucide="arrow-right" class="w-4 h-4"></i> Join</button>
+                            <input id="quiz-code-input" type="text" maxlength="6" required class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 uppercase tracking-widest font-heading text-center transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="Enter 6‑digit code" />
+                            <button type="submit" class="btn-primary px-6 py-3.5 rounded-xl text-white font-semibold shadow-lg shadow-emerald-500/20 flex items-center gap-2"><i data-lucide="arrow-right" class="w-4 h-4"></i> Join</button>
                         </form>
                     </div>
 
-                    <h3 class="font-semibold mb-3 flex items-center gap-2"><i data-lucide="book-open" class="w-4 h-4 text-indigo-400"></i> Available Quizzes</h3>
+                    <h3 class="font-semibold mb-3 flex items-center gap-2"><i data-lucide="book-open" class="w-4 h-4 text-emerald-400"></i> Available Quizzes</h3>
                     <div id="student-quiz-list" class="space-y-3"></div>
                     <div id="student-quiz-empty" class="text-center py-10 text-slate-500">
                         <i data-lucide="book-open" class="w-10 h-10 mx-auto mb-3 opacity-30"></i>
@@ -1179,7 +1060,9 @@
             </div>
         </div>
 
-        <!-- ===== QUIZ TAKING ===== -->
+        <!-- ============================================================
+        PAGE: QUIZ TAKING
+        ============================================================ -->
         <div id="page-quiz-taking" class="hidden fade-in h-full flex flex-col relative z-10">
             <div class="glass px-4 py-3 flex items-center justify-between shrink-0 flex-wrap gap-2">
                 <div>
@@ -1187,7 +1070,7 @@
                     <p class="text-xs text-slate-400" id="taking-progress">Q1 of 5</p>
                 </div>
                 <div class="flex items-center gap-3 flex-wrap">
-                    <div id="taking-timer" class="font-heading text-sm text-indigo-400 flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4"></i><span id="timer-display">--:--</span></div>
+                    <div id="taking-timer" class="font-heading text-sm text-emerald-400 flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4"></i><span id="timer-display">--:--</span></div>
                     <div id="violation-badge" class="hidden px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs flex items-center gap-1">⚠️ <span id="violation-count">0</span></div>
                     <div id="streak-display" class="hidden text-xs text-amber-400 flex items-center gap-1">🔥 <span id="streak-count">0</span></div>
                 </div>
@@ -1205,7 +1088,9 @@
             </div>
         </div>
 
-        <!-- ===== QUIZ RESULT ===== -->
+        <!-- ============================================================
+        PAGE: QUIZ RESULT
+        ============================================================ -->
         <div id="page-quiz-result" class="hidden fade-in h-full flex items-center justify-center px-4 relative z-10">
             <div class="glass rounded-2xl p-8 w-full max-w-md text-center slide-up">
                 <div id="result-icon" class="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center"></div>
@@ -1221,14 +1106,16 @@
             </div>
         </div>
 
-        <!-- ===== EXAM RULES OVERLAY ===== -->
+        <!-- ============================================================
+        EXAM RULES OVERLAY
+        ============================================================ -->
         <div id="exam-rules-overlay" class="rules-overlay hidden z-20">
             <div class="rules-box glass">
                 <h2>📋 Exam Rules</h2>
                 <p class="sub text-slate-400 text-sm mb-4">Please read carefully before starting your assessment</p>
                 <div id="rules-content" class="space-y-0.5 mb-6"></div>
                 <div class="flex items-center gap-3 mb-6">
-                    <input type="checkbox" id="rules-agree" class="w-5 h-5 accent-indigo-500" />
+                    <input type="checkbox" id="rules-agree" class="w-5 h-5 accent-emerald-500" />
                     <label for="rules-agree" class="text-sm text-slate-300">I have read and agree to the rules above</label>
                 </div>
                 <div class="flex gap-3">
@@ -1238,45 +1125,49 @@
             </div>
         </div>
 
-        <!-- ===== PROFILE MODAL ===== -->
+        <!-- ============================================================
+        PROFILE MODAL
+        ============================================================ -->
         <div id="profile-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
             <div class="glass rounded-2xl p-6 w-full max-w-sm slide-up">
                 <h3 class="font-heading text-xl font-bold mb-4">👤 Profile</h3>
                 <div class="flex items-center gap-4 mb-4">
-                    <img id="profile-avatar" src="" alt="avatar" class="w-16 h-16 rounded-full bg-slate-700 object-cover border-2 border-indigo-500/30" />
+                    <img id="profile-avatar" src="" alt="avatar" class="w-16 h-16 rounded-full bg-slate-700 object-cover border-2 border-emerald-500/30" />
                     <button onclick="uploadAvatar()" class="btn-secondary px-4 py-2 rounded-xl text-sm">Change Photo</button>
                 </div>
                 <label class="block text-sm text-slate-400 mb-1">Display Name</label>
-                <input id="profile-name" type="text" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white mb-4 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" />
+                <input id="profile-name" type="text" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white mb-4 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" />
                 <label class="block text-sm text-slate-400 mb-1">Theme</label>
                 <select id="profile-theme" onchange="applyTheme(this.value)" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white mb-4">
+                    <option value="forest">Forest (default)</option>
                     <option value="dark">Dark</option>
                     <option value="light">Light</option>
                     <option value="african">African</option>
                     <option value="ocean">Ocean</option>
-                    <option value="forest">Forest</option>
                 </select>
                 <button onclick="saveProfile()" class="btn-primary w-full py-3 rounded-xl text-white font-semibold">Save</button>
                 <button onclick="closeProfile()" class="mt-2 text-slate-400 w-full text-sm hover:text-white transition">Cancel</button>
             </div>
         </div>
 
-        <!-- ===== TOAST ===== -->
+        <!-- TOAST CONTAINER -->
         <div id="toast-container"></div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- FIREBASE + APPLICATION LOGIC                                  -->
-    <!-- ============================================================ -->
+    </div>
+    <!-- end .app-root -->
+
+    <!-- ============================================================
+    FIREBASE + APPLICATION LOGIC (Type Module)
+    ============================================================ -->
     <script type="module">
-        // ─── IMPORTS ──────────────────────────────────────────────────
+        // ─── IMPORTS ────────────────────────────────────────────────
         import { initializeApp } from "firebase/app";
         import { getAnalytics } from "firebase/analytics";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, signInAnonymously } from "firebase/auth";
         import { getFirestore, collection, doc, setDoc, getDoc, getDocs, addDoc, query, where, orderBy, onSnapshot, updateDoc, increment, deleteDoc, serverTimestamp, limit } from "firebase/firestore";
         import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
-        // ─── FIREBASE CONFIG — iMENA Test ─────────────────────────────
+        // ─── FIREBASE CONFIG ────────────────────────────────────────
         const firebaseConfig = {
             apiKey: "AIzaSyC48GEvgar83RAjWICP3ByM_IKmyZS05Eo",
             authDomain: "imena-test.firebaseapp.com",
@@ -1307,7 +1198,6 @@
         let currentStreak = 0;
         let quizStartTime = 0;
         let quizSubmitting = false;
-        let rulesAccepted = false;
         let pendingQuizId = null;
         let unsubscribers = [];
 
@@ -1326,7 +1216,7 @@
             const isError = type === 'error';
             div.className = `toast ${isError ? 'toast-error' : 'toast-success'}`;
             const icon = isError ? 'x-circle' : 'check-circle';
-            const color = isError ? 'text-red-400' : 'text-indigo-400';
+            const color = isError ? 'text-red-400' : 'text-emerald-400';
             div.innerHTML = `<i data-lucide="${icon}" class="w-5 h-5 ${color} shrink-0"></i><span>${msg}</span>`;
             container.appendChild(div);
             lucide.createIcons();
@@ -1357,7 +1247,7 @@
             else if (theme === 'forest') root.classList.add('theme-forest');
             const sel = $('profile-theme');
             if (sel) sel.value = theme;
-            applyPrimaryColor(localStorage.getItem('imena-primary') || '#6366f1');
+            applyPrimaryColor(localStorage.getItem('imena-primary') || '#10b981');
             applyFont(localStorage.getItem('imena-font') || 'inter');
             updateBrandName(localStorage.getItem('imena-brand') || 'iMENA Test');
         }
@@ -1379,12 +1269,7 @@
 
         function applyPrimaryColor(color) {
             localStorage.setItem('imena-primary', color);
-            const root = document.documentElement;
-            root.style.setProperty('--primary', color);
-            const btns = document.querySelectorAll('.btn-primary:not(.keep-gradient)');
-            btns.forEach(b => {
-                b.style.background = `linear-gradient(135deg, ${color}, ${adjustColor(color, -30)})`;
-            });
+            document.documentElement.style.setProperty('--primary', color);
             $('primary-color-label').textContent = color;
         }
         window.applyPrimaryColor = applyPrimaryColor;
@@ -1397,7 +1282,7 @@
             const B = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
             return `#${(1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1)}`;
         }
-        window.resetPrimaryColor = function() { applyPrimaryColor('#6366f1'); };
+        window.resetPrimaryColor = function() { applyPrimaryColor('#10b981'); };
 
         function updateBrandName(name) {
             localStorage.setItem('imena-brand', name);
@@ -1516,6 +1401,9 @@
             if (!name || !cls || !sdms) { toast('Please fill in all fields', 'error'); return; }
             showLoading(true);
             try {
+                if (!auth.currentUser) {
+                    await signInAnonymously(auth);
+                }
                 const q = query(collection(db, 'users'), where('sdms', '==', sdms));
                 const snap = await getDocs(q);
                 let uid = 'student_' + sdms;
@@ -1542,7 +1430,10 @@
                 showPage('student-portal');
                 loadStudentHome();
                 toast('Welcome ' + name);
-            } catch (err) { toast('Verification failed: ' + err.message, 'error'); } finally { showLoading(false); }
+            } catch (err) {
+                console.error(err);
+                toast('Verification failed: ' + err.message, 'error');
+            } finally { showLoading(false); }
         };
 
         // ─── LOGOUT ──────────────────────────────────────────────────
@@ -1555,7 +1446,9 @@
         };
         window.logoutStudent = function() {
             currentStudent = null;
-            signOut(auth);
+            if (auth.currentUser && auth.currentUser.isAnonymous) {
+                signOut(auth);
+            }
             showPage('landing');
         };
 
@@ -1595,7 +1488,7 @@
                 list.innerHTML = snap.docs.map(doc => {
                     const q = doc.data();
                     const qCount = q.questions?.length || 0;
-                    return `<div class="glass rounded-xl p-5 hover:shadow-lg hover:shadow-indigo-500/5 transition-all">
+                    return `<div class="glass rounded-xl p-5 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300">
                 <div class="flex items-start justify-between flex-wrap gap-2">
                   <div><h3 class="font-semibold text-lg">${escHtml(q.title)}</h3>
                     <p class="text-xs text-slate-400">${escHtml(q.subject)} • ${qCount} Qs • Pass: ${q.passingMark}% • ${q.timeLimit?q.timeLimit+'min':'∞'}</p>
@@ -1605,7 +1498,7 @@
                 </div>
                 <div class="flex gap-3 mt-3 flex-wrap">
                   <button onclick="deleteQuiz('${doc.id}')" class="text-xs text-red-400 hover:text-red-300 flex items-center gap-1"><i data-lucide="trash-2" class="w-3 h-3"></i> Delete</button>
-                  <button onclick="togglePublic('${doc.id}', ${q.public||false})" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1"><i data-lucide="${q.public?'globe':'globe'}" class="w-3 h-3"></i> ${q.public?'Public':'Make Public'}</button>
+                  <button onclick="togglePublic('${doc.id}', ${q.public||false})" class="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1"><i data-lucide="${q.public?'globe':'globe'}" class="w-3 h-3"></i> ${q.public?'Public':'Make Public'}</button>
                 </div>
               </div>`;
                 }).join('');
@@ -1660,26 +1553,26 @@
             let optionsHTML = '';
             if (type === 'multiple') {
                 optionsHTML = `<div class="grid grid-cols-1 gap-2 mb-2">${[0,1,2,3].map(i =>
-                    `<input type="text" placeholder="Option ${i+1}" class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-oidx="${i}">`
+                    `<input type="text" placeholder="Option ${i+1}" class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-oidx="${i}">`
                 ).join('')}</div>
               <label class="text-xs text-slate-400">Correct (1-4)</label>
-              <input type="number" min="1" max="4" value="1" class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white w-20 ml-2 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="correct">`;
+              <input type="number" min="1" max="4" value="1" class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white w-20 ml-2 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="correct">`;
             } else if (type === 'truefalse') {
                 optionsHTML =
                     `<label class="text-xs text-slate-400">Correct</label><select class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white ml-2" data-qidx="${idx}" data-field="correct-tf"><option value="0">True</option><option value="1">False</option></select>`;
             } else if (type === 'short' || type === 'essay') {
                 optionsHTML =
                     `<label class="text-xs text-slate-400">Expected Answer (for auto‑grading)</label>
-              <input type="text" placeholder="Expected answer" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="correct-short">
+              <input type="text" placeholder="Expected answer" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="correct-short">
               ${type === 'essay' ? '<p class="text-xs text-slate-500 mt-1">💡 Essays are manually graded by teacher</p>' : ''}`;
             } else if (type === 'matching') {
                 optionsHTML =
                     `<label class="text-xs text-slate-400">Matching Pairs (left → right)</label>
               <div class="space-y-1.5 mt-1" id="match-pairs-${idx}">
                 ${[0,1,2].map(i => `<div class="match-pair">
-                  <input type="text" placeholder="Term ${i+1}" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-match-left="${i}">
+                  <input type="text" placeholder="Term ${i+1}" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-match-left="${i}">
                   <span class="text-slate-500">→</span>
-                  <input type="text" placeholder="Definition ${i+1}" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-match-right="${i}">
+                  <input type="text" placeholder="Definition ${i+1}" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-match-right="${i}">
                   <button type="button" onclick="removeMatchPair(${idx}, ${i})" class="text-red-400 text-sm">✕</button>
                 </div>`).join('')}
               </div>
@@ -1687,28 +1580,28 @@
             } else if (type === 'fill') {
                 optionsHTML =
                     `<label class="text-xs text-slate-400">Sentence with blanks (use ___ for blanks)</label>
-              <textarea rows="2" placeholder="e.g. The capital of Nigeria is ___." class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="fill-text"></textarea>
+              <textarea rows="2" placeholder="e.g. The capital of Nigeria is ___." class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="fill-text"></textarea>
               <label class="text-xs text-slate-400 mt-2">Correct answers (comma separated)</label>
-              <input type="text" placeholder="Abuja, Lagos" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="fill-answers">`;
+              <input type="text" placeholder="Abuja, Lagos" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="fill-answers">`;
             } else if (type === 'ordering') {
                 optionsHTML =
                     `<label class="text-xs text-slate-400">Items to order (comma separated)</label>
-              <input type="text" placeholder="First, Second, Third, Fourth" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="order-items">
+              <input type="text" placeholder="First, Second, Third, Fourth" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="order-items">
               <label class="text-xs text-slate-400 mt-2">Correct order (comma separated indices, 1-based)</label>
-              <input type="text" placeholder="1,2,3,4" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="order-correct">`;
+              <input type="text" placeholder="1,2,3,4" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white mt-1 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="order-correct">`;
             }
 
             div.innerHTML = `
-            <div class="flex items-center justify-between mb-2"><span class="text-xs font-medium text-indigo-400 uppercase">${type.replace('multiple','MCQ')} #${idx+1}</span>
+            <div class="flex items-center justify-between mb-2"><span class="text-xs font-medium text-emerald-400 uppercase">${type.replace('multiple','MCQ')} #${idx+1}</span>
               <button type="button" onclick="removeQuestion(${idx})" class="text-red-400 hover:text-red-300"><i data-lucide="x" class="w-4 h-4"></i></button>
             </div>
-            <input type="text" placeholder="Question text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-2.5 text-white mb-3 placeholder-slate-500 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="text">
+            <input type="text" placeholder="Question text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-2.5 text-white mb-3 placeholder-slate-500 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="text">
             ${optionsHTML}
             <div class="mt-2 flex items-center gap-3 flex-wrap">
               <label class="text-xs text-slate-400">Points</label>
-              <input type="number" min="1" value="1" class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white w-16 transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="points">
+              <input type="number" min="1" value="1" class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white w-16 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="points">
               <label class="text-xs text-slate-400 flex items-center gap-1 ml-2"><input type="checkbox" data-qidx="${idx}" data-field="hint-check"> Hint</label>
-              <input type="text" placeholder="Hint text" class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white flex-1 min-w-[120px] transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-field="hint-text">
+              <input type="text" placeholder="Hint text" class="bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white flex-1 min-w-[120px] transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-field="hint-text">
             </div>
           `;
             container.appendChild(div);
@@ -1728,9 +1621,9 @@
             const div = document.createElement('div');
             div.className = 'match-pair';
             div.innerHTML = `
-            <input type="text" placeholder="Term ${i+1}" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-match-left="${i}">
+            <input type="text" placeholder="Term ${i+1}" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-match-left="${i}">
             <span class="text-slate-500">→</span>
-            <input type="text" placeholder="Definition ${i+1}" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" data-qidx="${idx}" data-match-right="${i}">
+            <input type="text" placeholder="Definition ${i+1}" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" data-qidx="${idx}" data-match-right="${i}">
             <button type="button" onclick="removeMatchPair(${idx}, ${i})" class="text-red-400 text-sm">✕</button>
           `;
             container.appendChild(div);
@@ -1981,7 +1874,7 @@
                     filtered.forEach(s => { const i = Math.min(4, Math.floor(s.percentage / 20));
                         counts[i]++; });
                     const max = Math.max(...counts, 1);
-                    const primary = localStorage.getItem('imena-primary') || '#6366f1';
+                    const primary = localStorage.getItem('imena-primary') || '#10b981';
                     $('chart-container').innerHTML = ranges.map((r, i) =>
                         `<div class="flex-1 flex flex-col items-center gap-1">
                 <div class="w-full rounded-t-lg chart-bar" style="height:${(counts[i]/max)*100}%;background:linear-gradient(180deg, ${primary}, ${adjustColor(primary, -40)})"></div>
@@ -2003,7 +1896,7 @@
                     });
                     const sorted = Object.entries(itemMisses).sort((a, b) => b[1] - a[1]).slice(0, 6);
                     $('item-analysis').innerHTML = sorted.length ? sorted.map(([k, v]) =>
-                        `<p class="text-sm flex justify-between"><span class="text-indigo-400">${escHtml(k)}</span><span class="text-slate-400">missed ${v} times</span></p>`
+                        `<p class="text-sm flex justify-between"><span class="text-emerald-400">${escHtml(k)}</span><span class="text-slate-400">missed ${v} times</span></p>`
                     ).join('') : '<p class="text-slate-400">No data yet</p>';
                 });
             });
@@ -2135,11 +2028,11 @@
                 empty.classList.add('hidden');
                 list.innerHTML = snap.docs.map(doc => {
                     const q = doc.data();
-                    return `<div class="glass rounded-xl p-4 flex items-center justify-between flex-wrap gap-2 hover:shadow-lg hover:shadow-indigo-500/5 transition">
+                    return `<div class="glass rounded-xl p-4 flex items-center justify-between flex-wrap gap-2 hover:shadow-lg hover:shadow-emerald-500/10 transition">
                 <div><h4 class="font-semibold">${escHtml(q.title)}</h4>
                   <p class="text-xs text-slate-400">${escHtml(q.subject)} • ${q.questions?.length||0} Qs • ${q.timeLimit?q.timeLimit+'min':'∞'} • Pass ${q.passingMark}%</p>
                 </div>
-                <button onclick="startQuiz('${doc.id}')" class="btn-primary px-5 py-2.5 rounded-xl text-sm text-white font-medium shadow-lg shadow-indigo-500/20">Start</button>
+                <button onclick="startQuiz('${doc.id}')" class="btn-primary px-5 py-2.5 rounded-xl text-sm text-white font-medium shadow-lg shadow-emerald-500/20">Start</button>
               </div>`;
                 }).join('');
                 lucide.createIcons();
@@ -2179,7 +2072,7 @@
                         const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
                         return `<div class="flex justify-between text-sm py-2 border-b border-slate-700/20">
                   <span class="flex items-center gap-2"><span class="text-slate-500 w-6">${medal}</span> ${escHtml(data.name)}</span>
-                  <span class="font-semibold text-indigo-400">${data.points||0} pts</span>
+                  <span class="font-semibold text-emerald-400">${data.points||0} pts</span>
                 </div>`;
                     }).join('');
             });
@@ -2222,8 +2115,6 @@
         function showExamRules(quiz) {
             const overlay = $('exam-rules-overlay');
             const content = $('rules-content');
-            rulesAccepted = false;
-
             const rules = [
                 `⏱️ Time Limit: ${quiz.timeLimit ? quiz.timeLimit + ' minutes' : 'Unlimited'}`,
                 `📝 ${quiz.questions?.length || 0} questions`,
@@ -2241,7 +2132,7 @@
             }
 
             content.innerHTML = rules.map(r =>
-                `<div class="rule-item"><span class="text-indigo-400 text-sm">•</span><span class="text-sm text-slate-300">${r}</span></div>`
+                `<div class="rule-item"><span class="text-emerald-400 text-sm">•</span><span class="text-sm text-slate-300">${r}</span></div>`
             ).join('');
 
             overlay.classList.remove('hidden');
@@ -2364,10 +2255,10 @@
               </button>`
                 ).join('');
             } else if (q.type === 'short') {
-                html += `<textarea class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white h-24 text-sm transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="Type your answer..." oninput="studentAnswers[currentQuestionIdx]=this.value">${ans||''}</textarea>
+                html += `<textarea class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white h-24 text-sm transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="Type your answer..." oninput="studentAnswers[currentQuestionIdx]=this.value">${ans||''}</textarea>
               ${localStorage.getItem('voice-input')!=='false' ? `<button onclick="startVoiceInput()" class="btn-secondary mt-2 px-4 py-2 rounded-xl text-sm flex items-center gap-1.5"><i data-lucide="mic" class="w-4 h-4"></i> Voice Input</button>` : ''}`;
             } else if (q.type === 'essay') {
-                html += `<textarea class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white h-32 text-sm transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none" placeholder="Write your essay here..." oninput="studentAnswers[currentQuestionIdx]=this.value">${ans||''}</textarea>
+                html += `<textarea class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white h-32 text-sm transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="Write your essay here..." oninput="studentAnswers[currentQuestionIdx]=this.value">${ans||''}</textarea>
               <p class="text-xs text-slate-500 mt-1">📝 This essay will be reviewed by your teacher</p>`;
             } else if (q.type === 'matching') {
                 const lefts = q.options || [];
@@ -2377,7 +2268,7 @@
                 lefts.forEach((left, i) => {
                     html += `<div class="match-pair">
                 <span class="text-sm font-medium w-32">${escHtml(left)}</span>
-                <select onchange="studentAnswers[currentQuestionIdx]=studentAnswers[currentQuestionIdx]||{};studentAnswers[currentQuestionIdx][${i}]=this.value" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 outline-none">
+                <select onchange="studentAnswers[currentQuestionIdx]=studentAnswers[currentQuestionIdx]||{};studentAnswers[currentQuestionIdx][${i}]=this.value" class="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none">
                   <option value="">— Select —</option>
                   ${rights.map((r,j) => `<option value="${j}" ${(selected[i]==j)?'selected':''}>${escHtml(r)}</option>`).join('')}
                 </select>
@@ -2607,11 +2498,11 @@
 
             let feedback = `<div class="space-y-2">`;
             if (score >= 80) {
-                feedback += `<p class="text-indigo-400 font-semibold">🤖 Excellent performance!</p>
+                feedback += `<p class="text-emerald-400 font-semibold">🤖 Excellent performance!</p>
               <p>You've mastered ${escHtml(subject)}. Your understanding is outstanding.</p>
               <p class="text-sm text-slate-400">💡 Consider helping classmates or exploring advanced topics.</p>`;
             } else if (score >= 60) {
-                feedback += `<p class="text-indigo-400 font-semibold">🤖 Good effort!</p>
+                feedback += `<p class="text-emerald-400 font-semibold">🤖 Good effort!</p>
               <p>You have a solid grasp of ${escHtml(subject)}, but there's room for improvement.</p>`;
                 if (weakAreas.length) {
                     feedback += `<p class="text-sm text-amber-400">📌 Focus on: ${weakAreas.map(d => escHtml(d.question)).join(', ')}</p>`;
@@ -2645,7 +2536,7 @@
             };
             const subjectKey = Object.keys(recs).find(k => subject.toLowerCase().includes(k.toLowerCase()));
             if (subjectKey) {
-                feedback += `<p class="text-sm text-indigo-400 mt-1">📚 Recommendation: ${recs[subjectKey]}</p>`;
+                feedback += `<p class="text-sm text-emerald-400 mt-1">📚 Recommendation: ${recs[subjectKey]}</p>`;
             }
             feedback += `</div>`;
             return feedback;
@@ -2656,7 +2547,7 @@
             $('profile-modal').classList.remove('hidden');
             $('profile-name').value = currentStudent?.name || '';
             $('profile-avatar').src = currentStudent?.photoURL || '';
-            const theme = localStorage.getItem('imena-theme') || 'dark';
+            const theme = localStorage.getItem('imena-theme') || 'forest';
             const sel = $('profile-theme');
             if (sel) sel.value = theme;
             lucide.createIcons();
@@ -2731,10 +2622,259 @@
             }
         });
 
+        // ─── THREE.JS 3D BACKGROUND ─────────────────────────────────
+        function initThree() {
+            const container = document.getElementById('three-canvas');
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0a1a0f);
+
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 4, 12);
+            camera.lookAt(0, 0, 0);
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // ── Lights ──────────────────────────────────────────────
+            const ambient = new THREE.AmbientLight(0x2d5a3a, 0.6);
+            scene.add(ambient);
+
+            const sun = new THREE.DirectionalLight(0xffeedd, 1.2);
+            sun.position.set(10, 20, 5);
+            sun.castShadow = true;
+            sun.shadow.mapSize.width = 1024;
+            sun.shadow.mapSize.height = 1024;
+            scene.add(sun);
+
+            const fill = new THREE.DirectionalLight(0x88ddff, 0.3);
+            fill.position.set(-10, 0, 10);
+            scene.add(fill);
+
+            const back = new THREE.DirectionalLight(0x4466aa, 0.2);
+            back.position.set(0, -5, -10);
+            scene.add(back);
+
+            // ── Ground plane (grassy) ──────────────────────────────
+            const groundGeo = new THREE.PlaneGeometry(40, 40);
+            const groundMat = new THREE.MeshStandardMaterial({
+                color: 0x1a3a2a,
+                roughness: 0.9,
+                metalness: 0.0,
+                transparent: true,
+                opacity: 0.6
+            });
+            const ground = new THREE.Mesh(groundGeo, groundMat);
+            ground.rotation.x = -Math.PI / 2;
+            ground.position.y = -0.5;
+            ground.receiveShadow = true;
+            scene.add(ground);
+
+            // ── Floating trees / foliage clusters ──────────────────
+            function createTree(x, z, scale) {
+                const group = new THREE.Group();
+
+                // Trunk
+                const trunkGeo = new THREE.CylinderGeometry(0.15 * scale, 0.25 * scale, 0.8 * scale, 6);
+                const trunkMat = new THREE.MeshStandardMaterial({ color: 0x5d3a1a, roughness: 0.9 });
+                const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+                trunk.position.y = 0.4 * scale;
+                trunk.castShadow = true;
+                group.add(trunk);
+
+                // Canopy – several overlapping spheres
+                const canopyMat = new THREE.MeshStandardMaterial({
+                    color: new THREE.Color().setHSL(0.28 + Math.random() * 0.06, 0.6, 0.25 + Math.random() * 0.15),
+                    roughness: 0.8,
+                    metalness: 0.0
+                });
+                const canopyPositions = [
+                    [0, 0.9 * scale, 0, 0.6 * scale],
+                    [-0.4 * scale, 0.7 * scale, 0.3 * scale, 0.4 * scale],
+                    [0.4 * scale, 0.7 * scale, -0.3 * scale, 0.4 * scale],
+                    [-0.2 * scale, 1.0 * scale, -0.2 * scale, 0.35 * scale],
+                    [0.3 * scale, 1.0 * scale, 0.2 * scale, 0.35 * scale]
+                ];
+                canopyPositions.forEach(([x, y, z, r]) => {
+                    const sphere = new THREE.Mesh(new THREE.SphereGeometry(r, 7, 7), canopyMat);
+                    sphere.position.set(x, y, z);
+                    sphere.castShadow = true;
+                    group.add(sphere);
+                });
+
+                group.position.set(x, -0.3, z);
+                return group;
+            }
+
+            function createShrub(x, z, scale) {
+                const mat = new THREE.MeshStandardMaterial({
+                    color: new THREE.Color().setHSL(0.3 + Math.random() * 0.05, 0.5, 0.2 + Math.random() * 0.1),
+                    roughness: 0.8
+                });
+                const group = new THREE.Group();
+                const count = 4 + Math.floor(Math.random() * 4);
+                for (let i = 0; i < count; i++) {
+                    const r = (0.15 + Math.random() * 0.25) * scale;
+                    const sphere = new THREE.Mesh(new THREE.SphereGeometry(r, 5, 5), mat);
+                    sphere.position.set(
+                        (Math.random() - 0.5) * 0.6 * scale,
+                        r * 0.6,
+                        (Math.random() - 0.5) * 0.6 * scale
+                    );
+                    sphere.castShadow = true;
+                    group.add(sphere);
+                }
+                group.position.set(x, -0.4, z);
+                return group;
+            }
+
+            // Place trees and shrubs in a natural layout
+            const treePositions = [
+                [-6, -4],
+                [-4.5, -5.5],
+                [-7.5, -2],
+                [-3, -7],
+                [-8, -6],
+                [6, -4],
+                [4.5, -5.5],
+                [7.5, -2],
+                [3, -7],
+                [8, -6],
+                [-5, 5],
+                [-7, 4],
+                [-3.5, 6],
+                [-6, 7],
+                [5, 5],
+                [7, 4],
+                [3.5, 6],
+                [6, 7],
+                [-2, -2],
+                [2, -2],
+                [-2, 2],
+                [2, 2],
+                [0, -3.5],
+                [0, 3.5],
+                [-4, 0],
+                [4, 0],
+                [-1, -5],
+                [1, -5]
+            ];
+            treePositions.forEach(([x, z]) => {
+                const scale = 0.6 + Math.random() * 0.6;
+                const tree = createTree(x, z, scale);
+                scene.add(tree);
+            });
+
+            // Shrubs (more numerous, smaller)
+            for (let i = 0; i < 60; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const radius = 3 + Math.random() * 7;
+                const x = Math.cos(angle) * radius;
+                const z = Math.sin(angle) * radius;
+                // avoid overlapping with trees too much
+                let tooClose = false;
+                for (const [tx, tz] of treePositions) {
+                    if (Math.hypot(x - tx, z - tz) < 1.2) { tooClose = true; break; }
+                }
+                if (tooClose) continue;
+                const shrub = createShrub(x, z, 0.5 + Math.random() * 0.5);
+                scene.add(shrub);
+            }
+
+            // ── Floating particles (fireflies / light motes) ──────
+            const particleCount = 400;
+            const particleGeo = new THREE.BufferGeometry();
+            const particlePos = new Float32Array(particleCount * 3);
+            const particleSpeeds = new Float32Array(particleCount);
+            const particlePhases = new Float32Array(particleCount);
+            for (let i = 0; i < particleCount; i++) {
+                const radius = 2 + Math.random() * 8;
+                const angle = Math.random() * Math.PI * 2;
+                const height = Math.random() * 6 - 1;
+                particlePos[i * 3] = Math.cos(angle) * radius;
+                particlePos[i * 3 + 1] = height;
+                particlePos[i * 3 + 2] = Math.sin(angle) * radius;
+                particleSpeeds[i] = 0.2 + Math.random() * 0.3;
+                particlePhases[i] = Math.random() * Math.PI * 2;
+            }
+            particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+
+            const particleMat = new THREE.PointsMaterial({
+                color: 0x88ffaa,
+                size: 0.08,
+                transparent: true,
+                opacity: 0.6,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+            const particles = new THREE.Points(particleGeo, particleMat);
+            scene.add(particles);
+
+            // ── Mouse tracking for subtle parallax ──────────────────
+            let mouseX = 0,
+                mouseY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            // ── Resize handler ──────────────────────────────────────
+            function onResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+            window.addEventListener('resize', onResize);
+
+            // ── Animation loop ──────────────────────────────────────
+            let time = 0;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                time += 0.005;
+
+                // gently rotate the whole scene for a cinematic feel
+                const rotSpeed = 0.0004;
+                const targetRot = mouseX * 0.08;
+                const currentRot = scene.rotation.y || 0;
+                scene.rotation.y += (targetRot - currentRot) * 0.02;
+
+                // float particles
+                const positions = particles.geometry.attributes.position.array;
+                for (let i = 0; i < particleCount; i++) {
+                    const idx = i * 3;
+                    const baseX = positions[idx];
+                    const baseZ = positions[idx + 2];
+                    const angle = Math.atan2(baseZ, baseX);
+                    const radius = Math.hypot(baseX, baseZ);
+                    const newAngle = angle + particleSpeeds[i] * 0.002;
+                    positions[idx] = Math.cos(newAngle) * radius;
+                    positions[idx + 2] = Math.sin(newAngle) * radius;
+                    positions[idx + 1] += Math.sin(time * particleSpeeds[i] + particlePhases[i]) * 0.001;
+                }
+                particles.geometry.attributes.position.needsUpdate = true;
+
+                // subtle tree sway (not implemented for performance, but we rotate the whole scene)
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // ─── Cleanup ─────────────────────────────────────────────
+            return () => {
+                renderer.dispose();
+                container.removeChild(renderer.domElement);
+                window.removeEventListener('resize', onResize);
+            };
+        }
+
         // ─── INIT ─────────────────────────────────────────────────────
-        applyTheme(localStorage.getItem('imena-theme') || 'dark');
+        applyTheme(localStorage.getItem('imena-theme') || 'forest');
         applyFont(localStorage.getItem('imena-font') || 'inter');
-        applyPrimaryColor(localStorage.getItem('imena-primary') || '#6366f1');
+        applyPrimaryColor(localStorage.getItem('imena-primary') || '#10b981');
         updateBrandName(localStorage.getItem('imena-brand') || 'iMENA Test');
 
         if (localStorage.getItem('voice-input') === 'false') {
@@ -2753,8 +2893,11 @@
                 preview.classList.add('has-logo'); }
         }
 
+        // Init 3D background
+        initThree();
+
         lucide.createIcons();
-        console.log('✅ iMENA Test v1.0 — securely connected to Firebase.');
+        console.log('✅ iMENA Test v3.0 — 3D Immersive Edition — securely connected to Firebase.');
     </script>
 </body>
 </html>
