@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://imena-test.web.app/sitemap.xml
