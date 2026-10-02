@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>iMENA Test</title>
-    <meta name="description" content="iMENA Test – Gamified, AI-powered assessments with 3D immersive environments, real‑time analytics, proctoring, and adaptive learning. Built for African schools and beyond." />
+    <title>iMENA Test | Assessment for better learning</title>
+    <meta name="description" content="iMENA Test brings assessment creation, delivery, and learning insight into a thoughtful experience designed for diverse classroom contexts." />
     <meta name="theme-color" content="#0a2e1a" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://imena-test.web.app" />
@@ -18,8 +18,8 @@
     <meta name="google-site-verification" content="63F-utxq1WfQhILDRg8CWR1ivkjjcITYcpxs0Snj74M" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="iMENA Test – 3D Immersive Assessments" />
-    <meta property="og:description" content="Gamified, AI-powered quizzes in a stunning 3D environment with proctoring and analytics." />
+    <meta property="og:title" content="iMENA Test | Assessment for better learning" />
+    <meta property="og:description" content="Create and deliver assessments, then use learning insight to plan a useful next step." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://imena-test.web.app" />
     <meta property="og:image" content="https://imena-test.web.app/og-image.jpg" />
@@ -27,8 +27,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="iMENA Test – 3D Immersive Assessments" />
-    <meta name="twitter:description" content="Gamified, AI-powered quizzes in a stunning 3D environment." />
+    <meta name="twitter:title" content="iMENA Test | Assessment for better learning" />
+    <meta name="twitter:description" content="A thoughtful assessment experience for teachers and learners." />
     <meta name="twitter:image" content="https://imena-test.web.app/og-image.jpg" />
 
     <!-- Favicon (inline data URI – no external file needed) -->
@@ -590,9 +590,216 @@
                 padding: 20px;
             }
         }
+
+        /* Product refresh: clear hierarchy, restrained motion, and safer fallbacks */
+        :focus-visible {
+            outline: 3px solid #a9d985 !important;
+            outline-offset: 3px;
+        }
+        .skip-link {
+            position: fixed;
+            z-index: 1000;
+            top: 12px;
+            left: 12px;
+            padding: 11px 15px;
+            border-radius: 10px;
+            background: #f4f8ef;
+            color: #123d30;
+            font-size: 13px;
+            font-weight: 700;
+            transform: translateY(-150%);
+            transition: transform .18s ease;
+        }
+        .skip-link:focus { transform: translateY(0); }
+        .app-root { overscroll-behavior-y: contain; }
+        .glass {
+            background: rgba(12, 30, 22, .82);
+            border-color: rgba(194, 223, 196, .17);
+            box-shadow: 0 16px 42px rgba(0, 0, 0, .22);
+        }
+        .glass-light { background: rgba(20, 44, 31, .68); }
+        .btn-primary {
+            background: linear-gradient(135deg, #218967, #147455);
+            box-shadow: 0 6px 18px rgba(16, 100, 70, .2);
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(16, 100, 70, .27); }
+        .btn-secondary { border-color: rgba(210, 229, 216, .22); }
+        button, input, select, textarea { font-family: inherit; }
+        .landing-main { width: min(1180px, 100%); padding-top: clamp(48px, 8vh, 92px); padding-bottom: 52px; }
+        .landing-hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+            gap: clamp(32px, 6vw, 82px);
+            align-items: center;
+            text-align: left;
+            padding-bottom: clamp(52px, 8vh, 84px);
+        }
+        .landing-copy { max-width: 660px; }
+        .landing-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 22px;
+            color: #a8d9af;
+            font-size: 11px;
+            font-weight: 750;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+        .landing-kicker-dot { width: 7px; height: 7px; border-radius: 50%; background: #d7eb8b; box-shadow: 0 0 14px rgba(215,235,139,.55); }
+        .landing-title {
+            max-width: 660px;
+            margin: 0 0 20px;
+            color: #f6f8f2;
+            font-size: clamp(44px, 6.3vw, 76px);
+            font-weight: 650;
+            line-height: .99;
+            letter-spacing: -.065em;
+        }
+        .landing-title .gradient-text { background-image: linear-gradient(110deg, #c7e994, #7ed4a5 58%, #84c8d8); }
+        .landing-lead { max-width: 555px; margin: 0; color: #c2d0c7; font-size: clamp(15px, 1.45vw, 18px); line-height: 1.75; }
+        .landing-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
+        .landing-action-primary, .landing-action-secondary {
+            min-height: 49px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 0 17px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .landing-action-secondary { background: rgba(255,255,255,.055); }
+        .landing-values { display: flex; flex-wrap: wrap; gap: 9px 18px; margin-top: 24px; color: #aebfb3; font-size: 10px; }
+        .landing-values span { display: inline-flex; align-items: center; gap: 6px; }
+        .landing-values svg { color: #b9dc9a; }
+        .landing-visual {
+            position: relative;
+            isolation: isolate;
+            min-height: 337px;
+            padding: 24px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: linear-gradient(145deg, rgba(25,58,43,.95), rgba(12,33,27,.92));
+            box-shadow: 0 30px 80px rgba(0,0,0,.3);
+        }
+        .landing-visual-orb {
+            position: absolute;
+            z-index: -1;
+            width: 260px;
+            height: 260px;
+            right: -66px;
+            top: -90px;
+            border: 1px solid rgba(197,232,170,.2);
+            border-radius: 50%;
+            background: radial-gradient(circle at 34% 34%, rgba(128,196,130,.4), rgba(38,115,81,.15) 44%, transparent 70%);
+            box-shadow: 0 0 0 18px rgba(255,255,255,.018), 0 0 0 40px rgba(255,255,255,.014);
+        }
+        .landing-preview-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+        .landing-preview-label { color: #a9d4b2; font-size: 9px; font-weight: 750; letter-spacing: .13em; }
+        .landing-preview-top h2 { margin: 7px 0 0; color: #f1f6ee; font-size: 20px; font-weight: 620; letter-spacing: -.04em; }
+        .landing-sample-chip { padding: 6px 8px; border: 1px solid rgba(217,236,210,.2); border-radius: 7px; background: rgba(255,255,255,.06); color: #c4d5c7; font-size: 8px; font-weight: 700; letter-spacing: .08em; }
+        .landing-preview-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 25px; }
+        .landing-preview-stats > div { min-width: 0; padding: 13px; border: 1px solid rgba(219,237,220,.13); border-radius: 12px; background: rgba(255,255,255,.055); }
+        .landing-preview-stats span { display: block; margin-bottom: 8px; color: #a6b9aa; font-size: 9px; }
+        .landing-preview-stats strong { display: block; overflow: hidden; color: #f5f7f1; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+        .landing-preview-stats small { display: block; margin-top: 5px; color: #9aada0; font-size: 8px; }
+        .landing-progress { height: 5px; margin-top: 10px; border-radius: 99px; background: rgba(255,255,255,.13); overflow: hidden; }
+        .landing-progress i { display: block; width: 68%; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#79bd83,#d9e887); }
+        .landing-bars { height: 93px; display: flex; align-items: end; gap: 7px; padding: 13px 4px 0; }
+        .landing-bars span { flex: 1; min-width: 5px; border-radius: 5px 5px 2px 2px; background: linear-gradient(180deg,rgba(193,227,147,.9),rgba(49,143,105,.36)); }
+        .landing-preview-foot { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; color: #91a799; font-size: 8px; }
+        .landing-preview-foot span:first-child { display: inline-flex; align-items: center; gap: 6px; color: #c7d8c6; }
+        .landing-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #b6d987; }
+        .landing-capabilities { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+        .landing-capability {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            min-height: 116px;
+            padding: 17px 15px;
+            border: 1px solid rgba(214,232,219,.13);
+            border-radius: 14px;
+            background: rgba(255,255,255,.045);
+            text-align: left;
+        }
+        .landing-capability-icon { width: 34px; height: 34px; display: grid; place-items: center; flex: 0 0 auto; border: 1px solid rgba(190,222,190,.17); border-radius: 10px; background: rgba(173,214,160,.09); color: #b9dc9a; }
+        .landing-capability h2 { margin: 2px 0 6px; color: #eef4ed; font-size: 12px; font-weight: 700; letter-spacing: -.015em; }
+        .landing-capability p { margin: 0; color: #aabbb0; font-size: 9px; line-height: 1.65; }
+        .landing-trust-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin-top: 22px;
+            padding: 12px 14px;
+            border: 1px solid rgba(230,207,148,.18);
+            border-radius: 11px;
+            background: rgba(83,70,36,.15);
+            color: #c4c0a9;
+            font-size: 9px;
+            line-height: 1.65;
+            text-align: left;
+        }
+        .landing-trust-note svg { flex: 0 0 auto; margin-top: 1px; color: #e1ca85; }
+        #page-teacher-login .glass, #page-student-verify .glass, #page-quiz-result .glass {
+            border-radius: 20px;
+            box-shadow: 0 24px 70px rgba(0,0,0,.34);
+        }
+        #page-teacher-login button, #page-student-verify button { min-height: 44px; }
+        body[data-page="teacher-dashboard"] #three-canvas { opacity: .24; filter: saturate(.55); }
+        body[data-page="student-portal"] #three-canvas { opacity: .42; filter: hue-rotate(42deg) saturate(.85); }
+        body[data-page="quiz-taking"] #three-canvas { opacity: 0; }
+        #three-canvas.three-fallback { overflow: hidden; }
+        #three-canvas.three-fallback::before, #three-canvas.three-fallback::after {
+            content: "";
+            position: absolute;
+            width: 56vw;
+            height: 56vw;
+            max-width: 700px;
+            max-height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(31,111,70,.22), rgba(31,111,70,0) 70%);
+            filter: blur(12px);
+        }
+        #three-canvas.three-fallback::before { left: -18vw; top: 4vh; }
+        #three-canvas.three-fallback::after { right: -20vw; bottom: -22vh; background: radial-gradient(circle, rgba(32,103,92,.18), rgba(32,103,92,0) 70%); }
+        @media (max-width: 900px) {
+            .landing-hero-grid { grid-template-columns: minmax(0,1fr) minmax(290px,.85fr); gap: 28px; }
+            .landing-visual { min-height: 310px; padding: 19px; }
+            .landing-capabilities { grid-template-columns: repeat(2,minmax(0,1fr)); }
+        }
+        @media (max-width: 680px) {
+            .landing-main { padding-top: 44px; }
+            .landing-hero-grid { grid-template-columns: 1fr; gap: 28px; padding-bottom: 37px; }
+            .landing-title { font-size: clamp(42px, 12vw, 62px); }
+            .landing-lead { font-size: 15px; }
+            .landing-visual { min-height: 295px; }
+            .landing-capabilities { grid-template-columns: 1fr; }
+            .landing-capability { min-height: 0; padding: 14px; }
+            .landing-capability p { font-size: 10px; }
+            .landing-trust-note { font-size: 9px; }
+        }
+        @media (max-width: 390px) {
+            .landing-actions { align-items: stretch; flex-direction: column; }
+            .landing-actions button { width: 100%; }
+            .landing-preview-stats { grid-template-columns: 1fr; }
+            .landing-visual { min-height: 365px; }
+            .landing-preview-foot { flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html, body, .app-root { scroll-behavior: auto !important; }
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <!-- ============================================================
     3D CANVAS – immersive forest with procedural trees
     ============================================================ -->
@@ -630,58 +837,47 @@
                 </div>
             </nav>
 
-            <main class="flex-1 max-w-6xl mx-auto px-4 py-20 text-center relative z-10">
-                <div class="mb-4 inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-sm">
-                    🌳 3D Immersive Learning — Powered by iMENA Lab
-                </div>
-                <h1 class="font-heading text-4xl md:text-7xl font-extrabold mb-4 leading-[1.1] tracking-tight">
-                    <span class="gradient-text">iMENA Test</span>
-                </h1>
-                <p class="text-slate-300 text-lg md:text-xl mb-6 max-w-2xl mx-auto font-light">
-                    Smart Assessments · 3D Immersive · AI-Powered · Forest‑Secure
-                </p>
-                <p class="text-slate-400 text-sm mb-10 max-w-xl mx-auto">
-                    The most advanced quiz platform for schools — now in stunning 3D.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4 mb-16">
-                    <button onclick="showPage('teacher-login')" class="btn-primary px-8 py-3.5 rounded-2xl text-white font-semibold flex items-center gap-2 shadow-xl shadow-emerald-500/20">
-                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Teacher Portal
-                    </button>
-                    <button onclick="showPage('student-verify')" class="btn-secondary px-8 py-3.5 rounded-2xl font-semibold flex items-center gap-2">
-                        <i data-lucide="graduation-cap" class="w-5 h-5"></i> Student Portal
-                    </button>
-                </div>
+            <main id="main-content" class="landing-main flex-1 max-w-6xl mx-auto px-4 py-16 relative z-10">
+                <section class="landing-hero-grid" aria-labelledby="landing-title">
+                    <div class="landing-copy">
+                        <div class="landing-kicker"><span class="landing-kicker-dot"></span>Assessment for better learning</div>
+                        <h1 id="landing-title" class="landing-title">Make every assessment a <span class="gradient-text">clearer</span> step forward.</h1>
+                        <p class="landing-lead">Create assessments with purpose, give learners a focused place to respond, and use results to plan what comes next.</p>
+                        <div class="landing-actions">
+                            <button onclick="showPage('teacher-login')" class="btn-primary landing-action-primary"><i data-lucide="layout-dashboard" class="w-5 h-5"></i> Teacher workspace <i data-lucide="arrow-up-right" class="w-4 h-4"></i></button>
+                            <button onclick="showPage('student-verify')" class="btn-secondary landing-action-secondary"><i data-lucide="graduation-cap" class="w-5 h-5"></i> Learner access</button>
+                        </div>
+                        <div class="landing-values">
+                            <span><i data-lucide="check" class="w-4 h-4"></i> Teacher-led workflows</span>
+                            <span><i data-lucide="check" class="w-4 h-4"></i> Clear learner experience</span>
+                            <span><i data-lucide="check" class="w-4 h-4"></i> Useful progress views</span>
+                        </div>
+                    </div>
+                    <div class="landing-visual glass" aria-label="Illustrative assessment dashboard preview">
+                        <div class="landing-visual-orb" aria-hidden="true"></div>
+                        <div class="landing-preview-top">
+                            <div><span class="landing-preview-label">ASSESSMENT OVERVIEW</span><h2>Class progress</h2></div>
+                            <span class="landing-sample-chip">SAMPLE VIEW</span>
+                        </div>
+                        <div class="landing-preview-stats">
+                            <div><span>Assessment</span><strong>Fractions &amp; ratios</strong><small>Mathematics · Grade 8</small></div>
+                            <div><span>Progress</span><strong>Learning objectives</strong><div class="landing-progress"><i></i></div></div>
+                        </div>
+                        <div class="landing-bars" aria-hidden="true">
+                            <span style="height:34%"></span><span style="height:48%"></span><span style="height:43%"></span><span style="height:64%"></span><span style="height:56%"></span><span style="height:78%"></span><span style="height:70%"></span><span style="height:88%"></span><span style="height:74%"></span><span style="height:96%"></span><span style="height:83%"></span><span style="height:100%"></span>
+                        </div>
+                        <div class="landing-preview-foot"><span><i class="landing-status-dot"></i> Teacher review</span><span>Illustrative interface · Not live data</span></div>
+                    </div>
+                </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
-                        <i data-lucide="trophy" class="w-8 h-8 text-amber-400 mb-3"></i>
-                        <h3 class="font-semibold">Gamification</h3>
-                        <p class="text-sm text-slate-400">Badges, streaks, leaderboards &amp; power‑ups</p>
-                    </div>
-                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
-                        <i data-lucide="brain" class="w-8 h-8 text-emerald-400 mb-3"></i>
-                        <h3 class="font-semibold">Adaptive Learning</h3>
-                        <p class="text-sm text-slate-400">Personalised difficulty &amp; AI feedback</p>
-                    </div>
-                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
-                        <i data-lucide="users" class="w-8 h-8 text-purple-400 mb-3"></i>
-                        <h3 class="font-semibold">Collaborative</h3>
-                        <p class="text-sm text-slate-400">Community quizzes, peer review &amp; chat</p>
-                    </div>
-                    <div class="glass rounded-2xl p-6 text-left hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
-                        <i data-lucide="bar-chart-3" class="w-8 h-8 text-emerald-400 mb-3"></i>
-                        <h3 class="font-semibold">Analytics</h3>
-                        <p class="text-sm text-slate-400">Item analysis, progress, predictions</p>
-                    </div>
-                </div>
+                <section class="landing-capabilities" aria-label="Platform capabilities">
+                    <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="notebook-pen" class="w-5 h-5"></i></span><div><h2>Design with intent</h2><p>Organize questions around subjects, learning objectives, and assessment plans.</p></div></article>
+                    <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="clipboard-check" class="w-5 h-5"></i></span><div><h2>Deliver with focus</h2><p>Give learners a clear place to review instructions, answer, and track progress.</p></div></article>
+                    <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="chart-no-axes-combined" class="w-5 h-5"></i></span><div><h2>Respond with insight</h2><p>Use assessment results to identify topics for review and support.</p></div></article>
+                    <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="accessibility" class="w-5 h-5"></i></span><div><h2>Keep people in control</h2><p>Build for readable, mobile-friendly interactions and human review.</p></div></article>
+                </section>
 
-                <div class="mt-12 flex flex-wrap justify-center gap-6 text-xs text-slate-400">
-                    <span>🔒 AES‑256 encrypted</span>
-                    <span>⚡ Real‑time sync</span>
-                    <span>📱 Mobile‑first</span>
-                    <span>🌍 10+ languages</span>
-                    <span>🎮 3D Immersive</span>
-                </div>
+                <aside class="landing-trust-note"><i data-lucide="info" class="w-4 h-4"></i><span>iMENA Test is an independent product. No approval, endorsement, accreditation, or official adoption by REB, MINEDUC, or another government institution is claimed.</span></aside>
             </main>
 
             <!-- ===== FOOTER ===== -->
@@ -707,7 +903,7 @@
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
                 </button>
                 <h2 class="font-heading text-2xl font-bold mb-2">Teacher Portal</h2>
-                <p class="text-slate-400 text-sm mb-6">Sign in with your Google account to manage quizzes &amp; reports</p>
+                <p class="text-slate-400 text-sm mb-6">Sign in with the Google account provisioned for you by your institution.</p>
                 <button onclick="signInWithGoogle()" class="google-btn">
                     <svg width="20" height="20" viewBox="0 0 48 48">
                         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -718,7 +914,7 @@
                     <span>Sign in with Google</span>
                 </button>
                 <div class="mt-4 text-center">
-                    <p class="text-xs text-slate-500">Only authorised teachers can access this portal.</p>
+                    <p class="text-xs text-slate-500">Teacher access must be approved and provisioned by your institution.</p>
                 </div>
             </div>
         </div>
@@ -732,7 +928,7 @@
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
                 </button>
                 <h2 class="font-heading text-2xl font-bold mb-2">Student Verification</h2>
-                <p class="text-slate-400 text-sm mb-6">Enter your details to access quizzes &amp; track your progress</p>
+                <p class="text-slate-400 text-sm mb-6">Use the name, class, and learner code held by your school.</p>
                 <form id="student-verify-form" onsubmit="handleStudentVerify(event)">
                     <label class="text-sm text-slate-400 block mb-1">Full Name *</label>
                     <input id="stu-name" type="text" required class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 mb-3 text-white placeholder-slate-500 transition focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none" placeholder="e.g. Amina Mohammed" />
@@ -1263,7 +1459,12 @@
             div.className = `toast ${isError ? 'toast-error' : 'toast-success'}`;
             const icon = isError ? 'x-circle' : 'check-circle';
             const color = isError ? 'text-red-400' : 'text-emerald-400';
-            div.innerHTML = `<i data-lucide="${icon}" class="w-5 h-5 ${color} shrink-0"></i><span>${msg}</span>`;
+            const iconEl = document.createElement('i');
+            iconEl.setAttribute('data-lucide', icon);
+            iconEl.className = 'w-5 h-5 ' + color + ' shrink-0';
+            const textEl = document.createElement('span');
+            textEl.textContent = String(msg);
+            div.append(iconEl, textEl);
             container.appendChild(div);
             lucide.createIcons();
             setTimeout(() => {
@@ -1278,6 +1479,7 @@
             const el = $('page-' + page);
             if (el) { el.classList.remove('hidden');
                 el.classList.add('fade-in'); }
+            document.body.dataset.page = page;
             setTimeout(lucide.createIcons, 150);
             $('exam-rules-overlay').classList.add('hidden');
         };
@@ -1398,16 +1600,12 @@
                         showPage('landing');
                     }
                 } else {
-                    const name = user.displayName || user.email || 'Teacher';
-                    await setDoc(userRef, { name, role: 'teacher', email: user.email, createdAt: serverTimestamp() });
-                    currentTeacherId = user.uid;
-                    $('teacher-display-name').textContent = name;
-                    showPage('teacher-dashboard');
-                    showTeacherTab('quizzes');
-                    toast('Welcome, ' + name + '! Your account has been created.');
+                    toast('Teacher access must be provisioned by your institution before sign-in.', 'error');
+                    await signOut(auth);
+                    showPage('teacher-login');
                 }
             } catch (err) {
-                toast('Authentication error: ' + err.message, 'error');
+                toast('We could not complete sign-in. Check your connection or ask your administrator for help.', 'error');
                 console.error(err);
             } finally { showLoading(false); }
         }
@@ -1418,8 +1616,10 @@
                 const result = await signInWithPopup(auth, provider);
                 await processTeacherSignIn(result.user);
             } catch (error) {
-                if (error.code === 'auth/popup-blocked') toast('Popup blocked! Please allow popups.', 'error');
-                else toast(error.message, 'error');
+                if (error.code === 'auth/popup-blocked') toast('Sign-in was blocked. Allow popups and try again.', 'error');
+                else if (error.code === 'auth/popup-closed-by-user') toast('Sign-in was closed before it finished.', 'error');
+                else if (error.code === 'auth/network-request-failed') toast('Connection problem. Check your internet and try again.', 'error');
+                else toast('Sign-in could not be completed. Please try again or contact your administrator.', 'error');
                 console.error(error);
             }
         };
@@ -1448,42 +1648,29 @@
             if (!name || !cls || !sdms) { toast('Please fill in all fields', 'error'); return; }
             showLoading(true);
             try {
-                // We no longer need to call signInAnonymously() because it's enabled in the console.
-                // The user is already signed in anonymously via onAuthStateChanged or we can let the
-                // existing auth state handle it. For safety, we check if a user exists.
-                if (!auth.currentUser) {
-                    // If no user, we can still proceed – Firestore rules will handle it.
-                    // But to be safe, we'll let the existing flow work.
-                }
-                const q = query(collection(db, 'users'), where('sdms', '==', sdms));
+                const q = query(collection(db, 'users'), where('sdms', '==', sdms), limit(5));
                 const snap = await getDocs(q);
-                let uid = 'student_' + sdms;
-                if (snap.empty) {
-                    await setDoc(doc(db, 'users', uid), {
-                        name,
-                        class: cls,
-                        sdms,
-                        role: 'student',
-                        points: 0,
-                        streak: 0,
-                        level: 1,
-                        badges: [],
-                        quizzesTaken: 0,
-                        createdAt: serverTimestamp()
-                    });
-                } else {
-                    uid = snap.docs[0].id;
-                    await updateDoc(doc(db, 'users', uid), { name, class: cls });
+                const enrolledRecord = snap.docs.find(studentDoc => {
+                    const record = studentDoc.data();
+                    return record.role === 'student' &&
+                        String(record.name || '').trim().toLowerCase() === name.toLowerCase() &&
+                        String(record.class || '').trim().toLowerCase() === cls.toLowerCase();
+                });
+                if (!enrolledRecord) {
+                    toast('We could not match those details to an enrolled learner. Check with your school administrator.', 'error');
+                    return;
                 }
-                currentStudent = { uid, name, class: cls, sdms };
-                $('student-name-display').textContent = name;
-                $('student-greeting').textContent = name.split(' ')[0];
+                const record = enrolledRecord.data();
+                const uid = enrolledRecord.id;
+                currentStudent = { uid, name: record.name, class: record.class, sdms };
+                $('student-name-display').textContent = record.name;
+                $('student-greeting').textContent = String(record.name).trim().split(/\s+/)[0];
                 showPage('student-portal');
                 loadStudentHome();
-                toast('Welcome ' + name);
+                toast('Welcome ' + record.name);
             } catch (err) {
                 console.error(err);
-                toast('Verification failed: ' + err.message, 'error');
+                toast('We could not verify your details. Check your connection or contact your school administrator.', 'error');
             } finally { showLoading(false); }
         };
 
@@ -2676,6 +2863,15 @@
         // ─── THREE.JS 3D BACKGROUND – PROPER FOREST ────────────────
         function initThree() {
             const container = document.getElementById('three-canvas');
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const compactDevice = window.matchMedia('(max-width: 760px)').matches;
+            const lowMemoryDevice = typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 4;
+            const lowCoreDevice = typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4;
+            if (!container || !window.THREE) return () => {};
+            if (prefersReducedMotion || compactDevice || lowMemoryDevice || lowCoreDevice || !window.WebGLRenderingContext) {
+                container.classList.add('three-fallback');
+                return () => {};
+            }
             const scene = new THREE.Scene();
             scene.background = new THREE.Color(0x0a1a0f);
             scene.fog = new THREE.Fog(0x0a1a0f, 20, 50);
@@ -2684,11 +2880,10 @@
             camera.position.set(0, 4, 14);
             camera.lookAt(0, 0, 0);
 
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, powerPreference: 'low-power' });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+            renderer.shadowMap.enabled = false;
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.2;
             container.appendChild(renderer.domElement);
@@ -2699,9 +2894,7 @@
 
             const sun = new THREE.DirectionalLight(0xffeedd, 1.4);
             sun.position.set(15, 25, 10);
-            sun.castShadow = true;
-            sun.shadow.mapSize.width = 2048;
-            sun.shadow.mapSize.height = 2048;
+            sun.castShadow = false;
             scene.add(sun);
 
             const fill = new THREE.DirectionalLight(0x88ddff, 0.4);
@@ -2724,7 +2917,7 @@
             const ground = new THREE.Mesh(groundGeo, groundMat);
             ground.rotation.x = -Math.PI / 2;
             ground.position.y = -0.6;
-            ground.receiveShadow = true;
+            ground.receiveShadow = false;
             scene.add(ground);
 
             // ── Procedural tree generator ────────────────────────────
@@ -2811,7 +3004,7 @@
             const forestRadius = 14;
 
             // Dense forest ring
-            for (let i = 0; i < 160; i++) {
+            for (let i = 0; i < 72; i++) {
                 const angle = Math.random() * Math.PI * 2;
                 const radius = 2 + Math.random() * forestRadius;
                 const x = Math.cos(angle) * radius;
@@ -2854,7 +3047,7 @@
                 return group;
             }
 
-            for (let i = 0; i < 120; i++) {
+            for (let i = 0; i < 40; i++) {
                 const angle = Math.random() * Math.PI * 2;
                 const radius = 1.5 + Math.random() * (forestRadius + 2);
                 const x = Math.cos(angle) * radius;
@@ -2869,7 +3062,7 @@
             }
 
             // ── Floating particles (fireflies / light motes) ──────
-            const particleCount = 500;
+            const particleCount = 160;
             const particleGeo = new THREE.BufferGeometry();
             const particlePos = new Float32Array(particleCount * 3);
             const particleSpeeds = new Float32Array(particleCount);
@@ -2915,9 +3108,14 @@
 
             // ── Animation loop ──────────────────────────────────────
             let time = 0;
+            let animationFrame = null;
+            let lastRenderTime = 0;
 
-            function animate() {
-                requestAnimationFrame(animate);
+            function animate(timestamp = 0) {
+                if (document.hidden) { animationFrame = null; return; }
+                animationFrame = requestAnimationFrame(animate);
+                if (timestamp - lastRenderTime < 33) return;
+                lastRenderTime = timestamp;
                 time += 0.005;
 
                 // subtle camera rotation based on mouse
@@ -2943,10 +3141,16 @@
                 renderer.render(scene, camera);
             }
 
+            function onVisibilityChange() {
+                if (!document.hidden && animationFrame === null) animate();
+            }
+            document.addEventListener('visibilitychange', onVisibilityChange);
             animate();
 
             // ─── Cleanup ─────────────────────────────────────────────
             return () => {
+                if (animationFrame !== null) cancelAnimationFrame(animationFrame);
+                document.removeEventListener('visibilitychange', onVisibilityChange);
                 renderer.dispose();
                 container.removeChild(renderer.domElement);
                 window.removeEventListener('resize', onResize);
@@ -2976,10 +3180,15 @@
         }
 
         // Init 3D background
-        initThree();
+        try {
+            initThree();
+        } catch (error) {
+            document.getElementById('three-canvas')?.classList.add('three-fallback');
+            console.warn('Decorative 3D background unavailable; using the lightweight fallback.', error);
+        }
 
         lucide.createIcons();
-        console.log('✅ iMENA Test v3.0 — 3D Immersive Edition — securely connected to Firebase.');
+        console.log('iMENA Test interface initialized.');
     </script>
 </body>
 </html>
