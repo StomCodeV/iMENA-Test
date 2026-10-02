@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>iMENA Test</title>
+    <title>iMENA Test | Assessment for better learning</title>
     <meta name="description" content="iMENA Test brings assessment creation, delivery, and learning insight into a thoughtful experience designed for diverse classroom contexts." />
     <meta name="theme-color" content="#0a2e1a" />
     <meta name="robots" content="index, follow" />
@@ -798,7 +798,7 @@
         }
     </style>
 </head>
-<body>
+<body data-page="landing">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <!-- ============================================================
     3D CANVAS – immersive forest with procedural trees
@@ -873,7 +873,7 @@
                 <section class="landing-capabilities" aria-label="Platform capabilities">
                     <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="notebook-pen" class="w-5 h-5"></i></span><div><h2>Design with intent</h2><p>Organize questions around subjects, learning objectives, and assessment plans.</p></div></article>
                     <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="clipboard-check" class="w-5 h-5"></i></span><div><h2>Deliver with focus</h2><p>Give learners a clear place to review instructions, answer, and track progress.</p></div></article>
-                    <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="chart-no-axes-combined" class="w-5 h-5"></i></span><div><h2>Respond with insight</h2><p>Use assessment results to identify topics for review and support.</p></div></article>
+                    <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="bar-chart-3" class="w-5 h-5"></i></span><div><h2>Respond with insight</h2><p>Use assessment results to identify topics for review and support.</p></div></article>
                     <article class="landing-capability"><span class="landing-capability-icon"><i data-lucide="accessibility" class="w-5 h-5"></i></span><div><h2>Keep people in control</h2><p>Build for readable, mobile-friendly interactions and human review.</p></div></article>
                 </section>
 
@@ -1056,7 +1056,7 @@
                 <div id="tab-submissions" class="hidden fade-in">
                     <div class="glass rounded-2xl overflow-hidden">
                         <div class="p-5 border-b border-slate-700/50 flex items-center justify-between flex-wrap gap-2">
-                            <h2 class="font-semibold text-lg">📋 Submissions</h2>
+                            <div><h2 class="font-semibold text-lg">📋 Submissions</h2><p class="mt-1 text-xs text-amber-200/80">Browser-calculated scores are provisional; server verification and review are required.</p></div>
                             <div class="flex gap-2">
                                 <button onclick="exportCSV()" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-1.5"><i data-lucide="download" class="w-4 h-4"></i> Export CSV</button>
                                 <button onclick="exportPDF()" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-1.5"><i data-lucide="file" class="w-4 h-4"></i> Export PDF</button>
@@ -1089,7 +1089,8 @@
                 <div id="tab-reports" class="hidden fade-in">
                     <div class="glass rounded-2xl p-6">
                         <h2 class="font-heading text-2xl font-bold mb-2">📊 Student Reports</h2>
-                        <p class="text-slate-400 text-sm mb-6">Detailed individual performance, question‑by‑question analysis</p>
+                        <p class="text-slate-400 text-sm mb-2">Individual performance and question-by-question practice analysis.</p>
+                        <p class="text-xs text-amber-200/80 mb-6">Scores shown here are provisional estimates, not official results.</p>
                         <div id="reports-list" class="space-y-3"></div>
                         <div id="reports-empty" class="text-center py-12 text-slate-500">
                             <i data-lucide="file-bar-chart" class="w-12 h-12 mx-auto mb-3 opacity-30"></i>
@@ -1110,11 +1111,11 @@
                             <p class="text-3xl font-bold" id="stat-submissions">0</p>
                         </div>
                         <div class="glass rounded-xl p-5">
-                            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Avg Score</p>
+                            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Avg Practice Score</p>
                             <p class="text-3xl font-bold" id="stat-avg">0%</p>
                         </div>
                         <div class="glass rounded-xl p-5">
-                            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">At‑Risk Students</p>
+                            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Below Practice Threshold</p>
                             <p class="text-3xl font-bold text-red-400" id="stat-atrisk">0</p>
                         </div>
                     </div>
@@ -1288,7 +1289,7 @@
                         <p class="text-sm">Ask your teacher for a quiz code</p>
                     </div>
 
-                    <h3 class="font-semibold mb-3 mt-8 flex items-center gap-2"><i data-lucide="bar-chart-2" class="w-4 h-4 text-emerald-400"></i> My Results</h3>
+                        <h3 class="font-semibold mb-3 mt-8 flex items-center gap-2"><i data-lucide="bar-chart-2" class="w-4 h-4 text-emerald-400"></i> My Practice Results</h3>
                     <div id="student-results" class="space-y-3"></div>
                     <div id="student-results-empty" class="text-center py-10 text-slate-500">
                         <i data-lucide="bar-chart-2" class="w-10 h-10 mx-auto mb-3 opacity-30"></i>
@@ -1313,7 +1314,7 @@
                 </div>
                 <div class="flex items-center gap-3 flex-wrap">
                     <div id="taking-timer" class="font-heading text-sm text-emerald-400 flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4"></i><span id="timer-display">--:--</span></div>
-                    <div id="violation-badge" class="hidden px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs flex items-center gap-1">⚠️ <span id="violation-count">0</span></div>
+                    <div id="violation-badge" class="hidden px-3 py-1 rounded-full bg-amber-500/15 text-amber-200 text-xs flex items-center gap-1" aria-live="polite">Security signals: <span id="violation-count">0</span></div>
                     <div id="streak-display" class="hidden text-xs text-amber-400 flex items-center gap-1">🔥 <span id="streak-count">0</span></div>
                 </div>
             </div>
@@ -1336,10 +1337,11 @@
         <div id="page-quiz-result" class="hidden fade-in h-full flex items-center justify-center px-4 relative z-10">
             <div class="glass rounded-2xl p-8 w-full max-w-md text-center slide-up">
                 <div id="result-icon" class="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center"></div>
-                <h2 class="font-heading text-2xl font-bold mb-1">Quiz Complete!</h2>
+                <h2 class="font-heading text-2xl font-bold mb-1">Practice result</h2>
                 <p class="text-slate-400 text-sm mb-4" id="result-quiz-name"></p>
                 <div class="text-5xl font-bold mb-2" id="result-score">85%</div>
                 <p class="text-sm mb-4" id="result-status"></p>
+                <p class="text-xs text-amber-200/80 mb-4">Provisional browser-calculated practice score. It is not an official result until validated by trusted server-side scoring and review.</p>
                 <div class="glass-light rounded-xl p-4 text-left text-sm mb-5" id="result-feedback"></div>
                 <div id="result-badges" class="flex justify-center gap-2 mb-5 flex-wrap"></div>
                 <div class="flex flex-col gap-2">
@@ -1480,6 +1482,7 @@
             if (el) { el.classList.remove('hidden');
                 el.classList.add('fade-in'); }
             document.body.dataset.page = page;
+            window.dispatchEvent(new CustomEvent('imena:pagechange', { detail: page }));
             setTimeout(lucide.createIcons, 150);
             $('exam-rules-overlay').classList.add('hidden');
         };
@@ -1579,6 +1582,7 @@
         };
         window.saveCustomization = function() { toast('Customization saved!'); };
 
+        // Teacher records must be pre-provisioned; Firestore Security Rules remain the authorization boundary.
         // ─── TEACHER AUTH (Google Only) ─────────────────────────────
         async function processTeacherSignIn(user) {
             showLoading(true);
@@ -1638,6 +1642,7 @@
             }
         });
 
+        // Match only an existing enrollment record; Security Rules must enforce record ownership and access.
         // ─── STUDENT VERIFY ──────────────────────────────────────────
         // Anonymous auth is now enabled in Firebase Console – we still use it.
         window.handleStudentVerify = async function(e) {
@@ -1993,13 +1998,15 @@
                     empty.classList.remove('hidden'); return; }
                 empty.classList.add('hidden');
                 body.innerHTML = filtered.map(s => {
-                    const pass = s.percentage >= 50;
+                    const pass = s.passed === true && !s.reviewRequired;
+                    const resultLabel = s.reviewRequired ? 'Teacher review required' : pass ? 'Practice threshold met' : 'More practice recommended';
+                    const resultClass = pass ? 'text-green-400' : 'text-amber-300';
                     return `<tr class="border-b border-slate-800/50 hover:bg-slate-800/20 transition">
                 <td class="px-4 py-3 font-medium">${escHtml(s.studentName)}</td>
                 <td class="px-4 py-3 text-slate-400">${escHtml(s.studentClass||'')}</td>
                 <td class="px-4 py-3">${escHtml(s.quizTitle)}</td>
                 <td class="px-4 py-3 font-bold">${s.percentage}%</td>
-                <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-full text-xs font-medium ${pass?'bg-green-500/20 text-green-400':'bg-red-500/20 text-red-400'}">${pass?'✅ Pass':'❌ Fail'}</span></td>
+                <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-full text-xs font-medium ${resultClass}">${resultLabel}</span><span class="block mt-1 text-[10px] text-amber-300">${s.resultStatus === 'provisional' ? 'Provisional' : 'Unverified legacy result'}</span></td>
                 <td class="px-4 py-3 text-xs text-slate-400">${s.date?.toDate?.().toLocaleDateString()||''}</td>
                 <td class="px-4 py-3"><button onclick="viewStudentReport('${s.id}')" class="btn-secondary px-3 py-1 rounded-lg text-xs flex items-center gap-1"><i data-lucide="eye" class="w-3 h-3"></i> View</button></td>
               </tr>`;
@@ -2023,16 +2030,19 @@
               <div class="grid grid-cols-3 gap-3 mb-5">
                 <div class="glass-light rounded-xl p-3 text-center"><p class="text-xs text-slate-400">Quiz</p><p class="font-semibold">${escHtml(data.quizTitle)}</p></div>
                 <div class="glass-light rounded-xl p-3 text-center"><p class="text-xs text-slate-400">Score</p><p class="font-bold text-2xl ${data.percentage>=50?'text-green-400':'text-red-400'}">${data.percentage}%</p></div>
-                <div class="glass-light rounded-xl p-3 text-center"><p class="text-xs text-slate-400">Status</p><p class="font-semibold ${data.percentage>=50?'text-green-400':'text-red-400'}">${data.percentage>=50?'Passed':'Failed'}</p></div>
+                <div class="glass-light rounded-xl p-3 text-center"><p class="text-xs text-slate-400">Result status</p><p class="font-semibold text-amber-300">${data.resultStatus === 'provisional' ? 'Provisional' : 'Unverified'}</p></div>
               </div>
               <h4 class="font-semibold mb-2">Question Breakdown</h4>
               <div class="space-y-2">`;
             details.forEach((d, i) => {
                 const correct = d.correct !== undefined ? d.correct : false;
-                html += `<div class="flex items-start gap-3 text-sm p-2 rounded-lg ${correct?'bg-green-500/10 border border-green-500/20':'bg-red-500/10 border border-red-500/20'}">
+                const needsReview = d.needsReview === true;
+                const itemStateClass = needsReview ? 'bg-amber-500/10 border border-amber-500/20' : correct ? 'bg-green-500/10 border border-green-500/20' : 'bg-red-500/10 border border-red-500/20';
+                const itemStateLabel = needsReview ? 'Teacher review required' : correct ? 'Practice answer matched' : 'Practice answer did not match';
+                html += `<div class="flex items-start gap-3 text-sm p-2 rounded-lg ${itemStateClass}">
                 <span class="text-slate-400 w-6 shrink-0">#${i+1}</span>
                 <span class="flex-1">${escHtml(d.question||'Question')}</span>
-                <span class="${correct?'text-green-400':'text-red-400'} font-medium">${correct?'✅ Correct':'❌ Incorrect'}</span>
+                <span class="${needsReview?'text-amber-300':correct?'text-green-400':'text-red-400'} font-medium">${itemStateLabel}</span>
                 ${d.answer !== undefined ? `<span class="text-xs text-slate-400">Answer: ${escHtml(String(d.answer))}</span>` : ''}
               </div>`;
             });
@@ -2070,7 +2080,7 @@
                 filtered.forEach(s => {
                     const key = s.studentId || s.studentName;
                     if (!groups[key]) groups[key] = { name: s.studentName, class: s.studentClass, quizzes: [] };
-                    groups[key].quizzes.push({ title: s.quizTitle, score: s.percentage, passed: s.percentage >= 50,
+                    groups[key].quizzes.push({ title: s.quizTitle, score: s.percentage, passed: s.passed === true && !s.reviewRequired,
                         date: s.date });
                 });
                 list.innerHTML = Object.values(groups).map(g => {
@@ -2286,13 +2296,15 @@
                 resEmpty.classList.add('hidden');
                 resList.innerHTML = snap.docs.map(doc => {
                     const s = doc.data();
-                    const pass = s.percentage >= 50;
+                    const pass = s.passed === true && !s.reviewRequired;
+                    const resultLabel = s.reviewRequired ? 'Teacher review required' : pass ? 'Practice threshold met' : 'More practice recommended';
                     return `<div class="glass-light rounded-xl p-4 flex items-center justify-between flex-wrap gap-2 hover:shadow-lg transition">
                 <div><p class="font-semibold text-sm">${escHtml(s.quizTitle)}</p>
                   <p class="text-xs text-slate-400">${s.date?.toDate?.().toLocaleDateString()||''}</p>
                 </div>
                 <div class="text-right"><p class="font-bold text-xl ${pass?'text-green-400':'text-red-400'}">${s.percentage}%</p>
-                  <p class="text-xs ${pass?'text-green-400':'text-red-400'}">${pass?'✅ Passed':'❌ Failed'}</p>
+                    <p class="text-xs ${pass?'text-green-400':'text-amber-300'}">${resultLabel}</p>
+                    <p class="text-[10px] text-amber-300/80">${s.resultStatus === 'provisional' ? 'Provisional score' : 'Unverified legacy result'}</p>
                 </div>
                 <button onclick="viewStudentReport('${doc.id}')" class="btn-secondary px-3 py-1 rounded-lg text-xs">View Report</button>
               </div>`;
@@ -2357,16 +2369,15 @@
                 `⏱️ Time Limit: ${quiz.timeLimit ? quiz.timeLimit + ' minutes' : 'Unlimited'}`,
                 `📝 ${quiz.questions?.length || 0} questions`,
                 `🎯 Passing mark: ${quiz.passingMark}%`,
-                `🚫 No tab switching or leaving the exam window`,
-                `🚫 Copy/paste is disabled during the exam`,
-                `🚫 Right-click is disabled`,
+                `🧭 A focus change may be detected during a controlled assessment`,
+                `Some browser controls may limit copy and context-menu actions when configured`,
                 `💡 Hints available for some questions`,
-                `📊 Your results will be saved automatically`,
-                `🔒 Proctoring is ${quiz.proctoring !== false ? 'enabled' : 'disabled'}`,
+                `Submit while connected so your responses can be processed`,
+                '🔒 Browser controls: ' + (quiz.proctoring !== false ? 'active for this assessment' : 'not active'),
                 `📱 Ensure you have a stable internet connection`
             ];
             if (quiz.proctoring !== false) {
-                rules.push('⚠️ Violations will be logged and may affect your score');
+                rules.push('👤 Focus changes are security signals for authorized staff review, not proof of misconduct.');
             }
 
             content.innerHTML = rules.map(r =>
@@ -2431,11 +2442,7 @@
                 violations++;
                 $('violation-badge').classList.remove('hidden');
                 $('violation-count').textContent = violations;
-                toast('⚠️ Tab switch detected! #' + violations, 'error');
-                if (violations >= 5) {
-                    toast('🚫 Too many violations! Submitting quiz...', 'error');
-                    submitQuiz();
-                }
+                toast('Focus change detected. If you need help, contact your invigilator.', 'error');
             }
         }
 
@@ -2599,6 +2606,7 @@
                 renderQuestion(); }
         };
 
+        // Client scoring is provisional. Official scoring and publication must run in trusted backend code.
         // ─── SUBMIT QUIZ ─────────────────────────────────────────────
         window.submitQuiz = async function() {
             if (quizSubmitting) return;
@@ -2612,7 +2620,9 @@
             showLoading(true);
             try {
                 let earned = 0,
-                    total = 0;
+                    total = 0,
+                    bonusPoints = 0,
+                    reviewRequired = false;
                 const details = [];
                 const questions = currentQuiz.questions;
 
@@ -2620,20 +2630,22 @@
                     const q = questions[i];
                     const ans = studentAnswers[i];
                     let correct = false;
-                    total += q.points;
+                    if (q.type === 'essay') reviewRequired = true;
+                    else total += q.points;
 
                     if (q.type === 'multiple' || q.type === 'truefalse') {
                         correct = ans === q.correct;
                     } else if (q.type === 'short') {
                         correct = ans && ans.toLowerCase().trim() === String(q.correct).toLowerCase().trim();
                     } else if (q.type === 'essay') {
-                        correct = ans && ans.trim().length > 0;
+                        correct = false;
                     } else if (q.type === 'matching') {
                         const selected = ans || {};
                         const rights = q.correct || [];
                         let matchCount = 0;
-                        Object.values(selected).forEach(v => { if (v !== '' && rights[parseInt(v)] === rights[parseInt(
-                                v)]) matchCount++; });
+                        Object.entries(selected).forEach(([leftIndex, rightIndex]) => {
+                            if (rightIndex !== '' && parseInt(leftIndex, 10) === parseInt(rightIndex, 10)) matchCount++;
+                        });
                         correct = matchCount >= rights.length * 0.7;
                     } else if (q.type === 'fill') {
                         const answers = ans || [];
@@ -2660,15 +2672,16 @@
                         correct,
                         answer: ans !== undefined ? ans : null,
                         points: q.points,
-                        earned: correct ? q.points : 0
+                        earned: correct ? q.points : 0,
+                        needsReview: q.type === 'essay'
                     });
                 }
 
-                if (currentStreak >= 3) earned += Math.min(currentStreak, 10);
-                if (Date.now() - quizStartTime < 120000) earned += 2;
+                if (currentStreak >= 3) bonusPoints += Math.min(currentStreak, 10);
+                if (Date.now() - quizStartTime < 120000) bonusPoints += 2;
 
-                const percentage = Math.round((earned / total) * 100);
-                const passed = percentage >= currentQuiz.passingMark;
+                const percentage = total > 0 ? Math.min(100, Math.round((earned / total) * 100)) : 0;
+                const passed = !reviewRequired && percentage >= currentQuiz.passingMark;
 
                 await addDoc(collection(db, 'submissions'), {
                     studentId: currentStudent.uid,
@@ -2679,6 +2692,13 @@
                     quizTitle: currentQuiz.title,
                     percentage,
                     passed,
+                    passingMark: currentQuiz.passingMark,
+                    resultStatus: 'provisional',
+                    scoringSource: 'client-side',
+                    approvalStatus: 'pending',
+                    publicationStatus: 'unpublished',
+                    reviewRequired,
+                    bonusPoints,
                     details,
                     violations: violations,
                     timeSpent: Math.round((Date.now() - quizStartTime) / 1000),
@@ -2689,7 +2709,7 @@
                 const userSnap = await getDoc(userRef);
                 if (userSnap.exists()) {
                     const data = userSnap.data();
-                    let points = (data.points || 0) + earned;
+                    let points = (data.points || 0) + earned + bonusPoints;
                     let streak = (data.streak || 0) + (passed ? 1 : 0);
                     if (!passed) streak = 0;
                     let level = Math.floor(points / 100) + 1;
@@ -2708,8 +2728,8 @@
                     `w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center ${passed?'bg-green-500/20':'bg-red-500/20'}`;
                 icon.innerHTML = `<i data-lucide="${passed?'trophy':'alert-circle'}" class="w-10 h-10 ${passed?'text-green-400':'text-red-400'}"></i>`;
                 $('result-status').innerHTML =
-                    `<span class="${passed?'text-green-400':'text-red-400'} font-semibold text-lg">${passed?'🎉 Passed!':'😅 Keep trying!'}</span>`;
-                $('result-feedback').innerHTML = generateAIFeedback(percentage, currentQuiz.subject, details);
+                    `<span class="${reviewRequired?'text-amber-300':passed?'text-green-400':'text-amber-300'} font-semibold text-lg">${reviewRequired?'Teacher review required':passed?'Practice threshold reached':'More practice recommended'}</span>`;
+                $('result-feedback').innerHTML = generateLearningFeedback(percentage, currentQuiz.subject, details);
 
                 const badgesEarned = [];
                 if (percentage >= 90) badgesEarned.push('🏆 Master');
@@ -2730,31 +2750,32 @@
             }
         };
 
-        function generateAIFeedback(score, subject, details) {
-            const weakAreas = details.filter(d => !d.correct).slice(0, 3);
+        function generateLearningFeedback(score, subject, details) {
+            const weakAreas = details.filter(d => !d.correct && !d.needsReview).slice(0, 3);
             const strongAreas = details.filter(d => d.correct).slice(0, 3);
+            const pendingItems = details.filter(d => d.needsReview);
 
             let feedback = `<div class="space-y-2">`;
             if (score >= 80) {
-                feedback += `<p class="text-emerald-400 font-semibold">🤖 Excellent performance!</p>
-              <p>You've mastered ${escHtml(subject)}. Your understanding is outstanding.</p>
+                feedback += `<p class="text-emerald-400 font-semibold">Strong practice result</p>
+              <p>Your responses show good progress in ${escHtml(subject)}.</p>
               <p class="text-sm text-slate-400">💡 Consider helping classmates or exploring advanced topics.</p>`;
             } else if (score >= 60) {
-                feedback += `<p class="text-emerald-400 font-semibold">🤖 Good effort!</p>
+                feedback += `<p class="text-emerald-400 font-semibold">Good effort</p>
               <p>You have a solid grasp of ${escHtml(subject)}, but there's room for improvement.</p>`;
                 if (weakAreas.length) {
                     feedback += `<p class="text-sm text-amber-400">📌 Focus on: ${weakAreas.map(d => escHtml(d.question)).join(', ')}</p>`;
                 }
                 feedback += `<p class="text-sm text-slate-400">💡 Review your notes and try practice questions.</p>`;
             } else if (score >= 40) {
-                feedback += `<p class="text-amber-400 font-semibold">🤖 Keep going!</p>
+                feedback += `<p class="text-amber-400 font-semibold">Keep going</p>
               <p>You're on the right track but need more practice in ${escHtml(subject)}.</p>`;
                 if (weakAreas.length) {
                     feedback += `<p class="text-sm text-red-400">📌 Review these topics: ${weakAreas.map(d => escHtml(d.question)).join(', ')}</p>`;
                 }
                 feedback += `<p class="text-sm text-slate-400">💡 Ask your teacher for extra help and resources.</p>`;
             } else {
-                feedback += `<p class="text-red-400 font-semibold">🤖 Let's try again!</p>
+                feedback += `<p class="text-red-400 font-semibold">Let's try again</p>
               <p>Don't give up! ${escHtml(subject)} takes time and practice.</p>
               <p class="text-sm text-slate-400">💡 Re-read your notes, watch tutorials, and attempt the quiz again.</p>`;
             }
@@ -2762,6 +2783,9 @@
             if (strongAreas.length && score >= 50) {
                 feedback +=
                     `<p class="text-sm text-emerald-400 mt-1">✅ Strong in: ${strongAreas.map(d => escHtml(d.question)).join(', ')}</p>`;
+            }
+            if (pendingItems.length) {
+                feedback += `<p class="text-sm text-amber-300 mt-1">Written responses need teacher review before a result can be confirmed.</p>`;
             }
 
             const recs = {
@@ -3111,8 +3135,11 @@
             let animationFrame = null;
             let lastRenderTime = 0;
 
+            function shouldPauseScene() {
+                return document.hidden || ['teacher-login', 'student-verify', 'quiz-taking', 'quiz-result'].includes(document.body.dataset.page);
+            }
             function animate(timestamp = 0) {
-                if (document.hidden) { animationFrame = null; return; }
+                if (shouldPauseScene()) { animationFrame = null; return; }
                 animationFrame = requestAnimationFrame(animate);
                 if (timestamp - lastRenderTime < 33) return;
                 lastRenderTime = timestamp;
@@ -3142,15 +3169,20 @@
             }
 
             function onVisibilityChange() {
-                if (!document.hidden && animationFrame === null) animate();
+                if (!shouldPauseScene() && animationFrame === null) animate();
+            }
+            function onPageChange() {
+                if (!shouldPauseScene() && animationFrame === null) animate();
             }
             document.addEventListener('visibilitychange', onVisibilityChange);
+            window.addEventListener('imena:pagechange', onPageChange);
             animate();
 
             // ─── Cleanup ─────────────────────────────────────────────
             return () => {
                 if (animationFrame !== null) cancelAnimationFrame(animationFrame);
                 document.removeEventListener('visibilitychange', onVisibilityChange);
+                window.removeEventListener('imena:pagechange', onPageChange);
                 renderer.dispose();
                 container.removeChild(renderer.domElement);
                 window.removeEventListener('resize', onResize);
